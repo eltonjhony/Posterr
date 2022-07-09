@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct AddPostView: View {
-    @ObservedObject var viewModel: ViewModel = ViewModel()
+    @ObservedObject var viewModel: ViewModel
     
     var body: some View {
         VStack {

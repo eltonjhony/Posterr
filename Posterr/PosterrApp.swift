@@ -7,21 +7,28 @@
 
 import SwiftUI
 
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        initializeApplicationContainer()
+        return true
+    }
+    
+    private func initializeApplicationContainer() {
+        let registrations: [PosterrAssembly] = [
+            ViewRegistration(),
+            ViewModelRegistration()
+        ]
+        PosterrAssembler.apply(registrations)
+    }
+}
+
 @main
 struct PosterrApp: App {
-    
-    static let user = UserModel(uuid: "4284872", username: "@eljholiveira", profilePicture: "user1", createdAt: Date())
-    let posts = [
-        PostModel(uuid: "48962489z29", content: "As a programmer, what is your most visited website?", createdAt: Date(), user: user, source: .post, earliestPosts: [])
-    ]
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     var body: some Scene {
         WindowGroup {
-            let viewModel = TabBarView.ViewModel(tabs: [
-                HomeTab(view: HomeView(posts: posts)),
-                ProfileTab(view: ProfileView())
-            ], selectedTab: 0)
-            TabBarView(viewModel: viewModel)
+            PosterrAssembler.resolve(TabBarView.self)
         }
     }
 }

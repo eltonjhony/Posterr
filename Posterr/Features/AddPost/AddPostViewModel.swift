@@ -11,7 +11,7 @@ extension AddPostView {
     
     class ViewModel: ObservableObject {
         
-        @Published var currentUser: UserModel? = PosterrApp.user
+        @Published var currentUser: UserModel? = UserModel(uuid: "4284872", username: "@eljholiveira", profilePicture: "user1", createdAt: Date())
         @Published var content: String = ""
         
     }
