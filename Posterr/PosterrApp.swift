@@ -10,15 +10,24 @@ import SwiftUI
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         initializeApplicationContainer()
+        setupUsers()
         return true
     }
     
     private func initializeApplicationContainer() {
         let registrations: [PosterrAssembly] = [
             ViewRegistration(),
-            ViewModelRegistration()
+            ViewModelRegistration(),
+            DomainRegistration(),
+            DatasourceRegistration(),
+            CoreRegistration()
         ]
         PosterrAssembler.apply(registrations)
+    }
+    
+    private func setupUsers() {
+        let usecase = PosterrAssembler.resolve(UserRegistrable.self)
+        usecase.register()
     }
 }
 

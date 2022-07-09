@@ -35,5 +35,6 @@ struct AddPostView: View {
             Spacer()
         }
         .padding()
+        .onAppear(perform: viewModel.onAppear)
     }
 }

@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum SourceType {
+public enum SourceType: ModelProtocol {
     case post, repost, quote
 }
 
-struct PostModel {
+public struct PostModel: ModelProtocol {
     let uuid: String
     let content: String?
     let createdAt: Date

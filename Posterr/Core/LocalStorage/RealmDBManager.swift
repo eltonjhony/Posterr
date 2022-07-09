@@ -40,7 +40,7 @@ extension RealmDBManager: DBManager {
     func save(object: Storable) throws {
         guard let realm = realm, let object = object as? Object else { throw RealmError.eitherRealmIsNilOrNotRealmSpecificModel }
         try realm.write {
-            realm.add(object)
+            realm.add(object, update: .modified)
         }
     }
     
@@ -71,7 +71,7 @@ extension RealmDBManager: DBManager {
     }
     
     func fetch<T>(_ model: T.Type, predicate: NSPredicate?, sorted: Sorted?) -> AnyPublisher<[T], Error> where T : Storable {
-        Future<[T], Error> { [weak self] promisse in
+        Future { [weak self] promisse in
             guard let realm = self?.realm, let model = model as? Object.Type else {
                 promisse(.failure(RealmError.eitherRealmIsNilOrNotRealmSpecificModel))
                 return

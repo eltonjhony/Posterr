@@ -47,6 +47,19 @@
 		53FEFF172879FD0F0016B21C /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF162879FD0F0016B21C /* DBManager.swift */; };
 		53FEFF192879FD280016B21C /* RealmDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF182879FD280016B21C /* RealmDBManager.swift */; };
 		53FEFF1B287A00D40016B21C /* Touchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF1A287A00D40016B21C /* Touchable.swift */; };
+		53FEFF21287A04B10016B21C /* ModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF20287A04B10016B21C /* ModelProtocol.swift */; };
+		53FEFF24287A05680016B21C /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF23287A05680016B21C /* UserEntity.swift */; };
+		53FEFF28287A05CF0016B21C /* UserProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF27287A05CF0016B21C /* UserProvider.swift */; };
+		53FEFF2A287A065E0016B21C /* UserRealmProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF29287A065E0016B21C /* UserRealmProvider.swift */; };
+		53FEFF2D287A06A80016B21C /* Loggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF2C287A06A80016B21C /* Loggable.swift */; };
+		53FEFF2F287A06BB0016B21C /* CustomLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF2E287A06BB0016B21C /* CustomLogger.swift */; };
+		53FEFF33287A06F80016B21C /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF32287A06F80016B21C /* Date.swift */; };
+		53FEFF39287A0E410016B21C /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF38287A0E410016B21C /* UserRepository.swift */; };
+		53FEFF3B287A0F5B0016B21C /* DefaultUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF3A287A0F5B0016B21C /* DefaultUserRepository.swift */; };
+		53FEFF3F287A101B0016B21C /* UserRegistrable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF3E287A101B0016B21C /* UserRegistrable.swift */; };
+		53FEFF41287A13970016B21C /* DomainRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF40287A13970016B21C /* DomainRegistration.swift */; };
+		53FEFF43287A13C70016B21C /* DatasourceRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF42287A13C70016B21C /* DatasourceRegistration.swift */; };
+		53FEFF45287A14770016B21C /* CoreRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF44287A14770016B21C /* CoreRegistration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +111,19 @@
 		53FEFF162879FD0F0016B21C /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		53FEFF182879FD280016B21C /* RealmDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDBManager.swift; sourceTree = "<group>"; };
 		53FEFF1A287A00D40016B21C /* Touchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Touchable.swift; sourceTree = "<group>"; };
+		53FEFF20287A04B10016B21C /* ModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelProtocol.swift; sourceTree = "<group>"; };
+		53FEFF23287A05680016B21C /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
+		53FEFF27287A05CF0016B21C /* UserProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProvider.swift; sourceTree = "<group>"; };
+		53FEFF29287A065E0016B21C /* UserRealmProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRealmProvider.swift; sourceTree = "<group>"; };
+		53FEFF2C287A06A80016B21C /* Loggable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loggable.swift; sourceTree = "<group>"; };
+		53FEFF2E287A06BB0016B21C /* CustomLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLogger.swift; sourceTree = "<group>"; };
+		53FEFF32287A06F80016B21C /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		53FEFF38287A0E410016B21C /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		53FEFF3A287A0F5B0016B21C /* DefaultUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserRepository.swift; sourceTree = "<group>"; };
+		53FEFF3E287A101B0016B21C /* UserRegistrable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrable.swift; sourceTree = "<group>"; };
+		53FEFF40287A13970016B21C /* DomainRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainRegistration.swift; sourceTree = "<group>"; };
+		53FEFF42287A13C70016B21C /* DatasourceRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasourceRegistration.swift; sourceTree = "<group>"; };
+		53FEFF44287A14770016B21C /* CoreRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreRegistration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,13 +170,13 @@
 			isa = PBXGroup;
 			children = (
 				53FEFEEC2879E5C80016B21C /* Core */,
+				53FEFF1C287A04200016B21C /* Datasource */,
+				53FEFF3C287A0FE70016B21C /* Domain */,
 				53FEFEC02879C2FF0016B21C /* Views */,
 				53FEFECA2879D1040016B21C /* Features */,
 				53FEFE922879AFCF0016B21C /* PosterrApp.swift */,
 				53FEFE962879AFD10016B21C /* Assets.xcassets */,
 				53FEFE982879AFD10016B21C /* Preview Content */,
-				53FEFEBE2879B67B0016B21C /* PostModel.swift */,
-				53FEFEBC2879B6530016B21C /* UserModel.swift */,
 			);
 			path = Posterr;
 			sourceTree = "<group>";
@@ -174,8 +200,6 @@
 		53FEFEC02879C2FF0016B21C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				53FEFEDB2879D74F0016B21C /* Modifiers */,
-				53FEFED12879D2400016B21C /* Shapes */,
 				53FEFEC52879C8C80016B21C /* Components */,
 				53FEFEC12879C30C0016B21C /* PostView.swift */,
 				53FEFECF2879D16D0016B21C /* BottomNavigationView.swift */,
@@ -263,8 +287,11 @@
 		53FEFEEC2879E5C80016B21C /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				53FEFF30287A06DF0016B21C /* Extensions */,
 				53FEFF0F2879FC610016B21C /* LocalStorage */,
 				53FEFEED2879E5D90016B21C /* DI */,
+				53FEFF1D287A043E0016B21C /* UI */,
+				53FEFF2B287A06910016B21C /* Logging */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -286,6 +313,9 @@
 			children = (
 				53FEFF082879E99E0016B21C /* ViewRegistration.swift */,
 				53FEFF022879E8D20016B21C /* ViewModelRegistration.swift */,
+				53FEFF40287A13970016B21C /* DomainRegistration.swift */,
+				53FEFF42287A13C70016B21C /* DatasourceRegistration.swift */,
+				53FEFF44287A14770016B21C /* CoreRegistration.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -300,6 +330,119 @@
 				53FEFF182879FD280016B21C /* RealmDBManager.swift */,
 			);
 			path = LocalStorage;
+			sourceTree = "<group>";
+		};
+		53FEFF1C287A04200016B21C /* Datasource */ = {
+			isa = PBXGroup;
+			children = (
+				53FEFF22287A05510016B21C /* Entities */,
+				53FEFF1F287A04A80016B21C /* Config */,
+				53FEFF1E287A04770016B21C /* Models */,
+				53FEFF25287A05B10016B21C /* Providers */,
+				53FEFF34287A0DFF0016B21C /* Repositories */,
+			);
+			path = Datasource;
+			sourceTree = "<group>";
+		};
+		53FEFF1D287A043E0016B21C /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				53FEFEDB2879D74F0016B21C /* Modifiers */,
+				53FEFED12879D2400016B21C /* Shapes */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		53FEFF1E287A04770016B21C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				53FEFEBE2879B67B0016B21C /* PostModel.swift */,
+				53FEFEBC2879B6530016B21C /* UserModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		53FEFF1F287A04A80016B21C /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				53FEFF20287A04B10016B21C /* ModelProtocol.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		53FEFF22287A05510016B21C /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				53FEFF23287A05680016B21C /* UserEntity.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		53FEFF25287A05B10016B21C /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				53FEFF26287A05BB0016B21C /* Local */,
+				53FEFF27287A05CF0016B21C /* UserProvider.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		53FEFF26287A05BB0016B21C /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				53FEFF29287A065E0016B21C /* UserRealmProvider.swift */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		53FEFF2B287A06910016B21C /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				53FEFF2C287A06A80016B21C /* Loggable.swift */,
+				53FEFF2E287A06BB0016B21C /* CustomLogger.swift */,
+			);
+			path = Logging;
+			sourceTree = "<group>";
+		};
+		53FEFF30287A06DF0016B21C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				53FEFF32287A06F80016B21C /* Date.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		53FEFF34287A0DFF0016B21C /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				53FEFF37287A0E270016B21C /* User */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		53FEFF37287A0E270016B21C /* User */ = {
+			isa = PBXGroup;
+			children = (
+				53FEFF38287A0E410016B21C /* UserRepository.swift */,
+				53FEFF3A287A0F5B0016B21C /* DefaultUserRepository.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		53FEFF3C287A0FE70016B21C /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				53FEFF3D287A10040016B21C /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		53FEFF3D287A10040016B21C /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				53FEFF3E287A101B0016B21C /* UserRegistrable.swift */,
+			);
+			path = UseCases;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -413,6 +556,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53FEFF2D287A06A80016B21C /* Loggable.swift in Sources */,
 				53FEFE952879AFCF0016B21C /* HomeView.swift in Sources */,
 				53FEFF192879FD280016B21C /* RealmDBManager.swift in Sources */,
 				53FEFEDA2879D4250016B21C /* ProfileView.swift in Sources */,
@@ -421,15 +565,24 @@
 				53FEFECC2879D1150016B21C /* TabBarView.swift in Sources */,
 				53FEFE932879AFCF0016B21C /* PosterrApp.swift in Sources */,
 				53FEFED52879D3040016B21C /* TabBarViewModel.swift in Sources */,
+				53FEFF45287A14770016B21C /* CoreRegistration.swift in Sources */,
 				53FEFF172879FD0F0016B21C /* DBManager.swift in Sources */,
+				53FEFF41287A13970016B21C /* DomainRegistration.swift in Sources */,
+				53FEFF21287A04B10016B21C /* ModelProtocol.swift in Sources */,
+				53FEFF3F287A101B0016B21C /* UserRegistrable.swift in Sources */,
+				53FEFF33287A06F80016B21C /* Date.swift in Sources */,
+				53FEFF43287A13C70016B21C /* DatasourceRegistration.swift in Sources */,
 				53FEFF132879FC960016B21C /* RealmProvider.swift in Sources */,
 				53FEFEDD2879D7660016B21C /* NavBarModifier.swift in Sources */,
+				53FEFF3B287A0F5B0016B21C /* DefaultUserRepository.swift in Sources */,
 				53FEFEBD2879B6530016B21C /* UserModel.swift in Sources */,
 				53FEFEE12879D86D0016B21C /* ViewModfier+Factory.swift in Sources */,
 				53FEFF072879E9390016B21C /* ProfileViewModel.swift in Sources */,
 				53FEFEC22879C30C0016B21C /* PostView.swift in Sources */,
 				53FEFEBF2879B67B0016B21C /* PostModel.swift in Sources */,
 				53FEFF112879FC7F0016B21C /* MappableProtocol.swift in Sources */,
+				53FEFF24287A05680016B21C /* UserEntity.swift in Sources */,
+				53FEFF28287A05CF0016B21C /* UserProvider.swift in Sources */,
 				53FEFF092879E99E0016B21C /* ViewRegistration.swift in Sources */,
 				53FEFED02879D16D0016B21C /* BottomNavigationView.swift in Sources */,
 				53FEFEC72879C8D70016B21C /* ProfilePicture.swift in Sources */,
@@ -438,11 +591,14 @@
 				53FEFED32879D24D0016B21C /* RoundedCorner.swift in Sources */,
 				53FEFF152879FCB70016B21C /* Storable.swift in Sources */,
 				53FEFEF32879E6E50016B21C /* PosterrAssembler.swift in Sources */,
+				53FEFF39287A0E410016B21C /* UserRepository.swift in Sources */,
 				53FEFEF82879E75F0016B21C /* PosterrAssembly.swift in Sources */,
+				53FEFF2A287A065E0016B21C /* UserRealmProvider.swift in Sources */,
 				53FEFEFE2879E7C20016B21C /* Resolver+Extension.swift in Sources */,
 				53FEFEE42879DA430016B21C /* AddPostView.swift in Sources */,
 				53FEFEDF2879D82F0016B21C /* ViewModifier.swift in Sources */,
 				53FEFEEB2879DD300016B21C /* TextArea.swift in Sources */,
+				53FEFF2F287A06BB0016B21C /* CustomLogger.swift in Sources */,
 				53FEFEE62879DAF90016B21C /* AddPostViewModel.swift in Sources */,
 				53FEFECE2879D1200016B21C /* TabBarItems.swift in Sources */,
 				53FEFF1B287A00D40016B21C /* Touchable.swift in Sources */,
