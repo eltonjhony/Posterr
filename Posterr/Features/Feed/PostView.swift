@@ -11,14 +11,9 @@ import SwiftUI
 struct PostView: View {
     let post: PostModel
     
-    let onRepost: ActionCompletion?
-    let onQuote: ActionCompletion?
+    var onRepost: ActionCompletion? = nil
     
-    init(post: PostModel, onRepost: ActionCompletion? = nil, onQuote: ActionCompletion? = nil) {
-        self.post = post
-        self.onRepost = onRepost
-        self.onQuote = onQuote
-    }
+    @State var showQuote: Bool = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -36,6 +31,14 @@ struct PostView: View {
             }
         }
         .padding(.horizontal)
+        .sheet(isPresented: $showQuote) {
+            AddPostView(
+                viewModel: PosterrAssembler.resolve(
+                    AddPostView.ViewModel.self,
+                    argument: AddPostView.SubmissionType.quote(post)
+                )
+            )
+        }
     }
     
     @ViewBuilder
@@ -44,7 +47,7 @@ struct PostView: View {
             Text(post.content ?? "")
             if case .quote = post.source {
                 VStack {
-                    if let originalPost = post.earliestPosts.first {
+                    if let originalPost = post.originalPosts.first {
                         PostView(post: originalPost)
                     }
                 }
@@ -67,10 +70,8 @@ struct PostView: View {
                 Image(systemName: "signpost.left")
                     .behaviour(.touchable(onRepost))
             }
-            if let onQuote = onQuote {
-                Image(systemName: "quote.bubble")
-                    .behaviour(.touchable(onQuote))
-            }
+            Image(systemName: "quote.bubble")
+                .behaviour(.touchable({showQuote.toggle()}))
             Spacer()
         }
         .padding(.vertical, 4)

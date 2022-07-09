@@ -10,7 +10,9 @@ import SwinjectAutoregistration
 
 final class ViewModelRegistration: PosterrAssembly {
     func assemble(container: PosterrContainer) {
-        container.autoregister(AddPostView.ViewModel.self, initializer: AddPostView.ViewModel.init)
+        container.autoregister(AddPostView.ViewModel.self, argument: AddPostView.SubmissionType.self) { argument in
+            AddPostView.ViewModel(type: argument, userRepository: container~>, usecase: container~>)
+        }
         container.autoregister(HomeView.ViewModel.self, initializer: HomeView.ViewModel.init)
         container.autoregister(ProfileView.ViewModel.self, initializer: ProfileView.ViewModel.init)
         

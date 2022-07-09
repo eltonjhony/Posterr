@@ -24,4 +24,8 @@ final class DefaultPostRepository: PostRepository {
         provider.addPost(post)
     }
     
+    func getAllPosts() -> AnyPublisher<[PostModel], Error> {
+        provider.getAllPosts()
+    }
+    
 }

@@ -14,9 +14,9 @@ struct HomeView: View {
         content
             .style(.navBar(title: "Posterr Feed"))
             .edgesIgnoringSafeArea(.bottom)
+            .onAppear(perform: viewModel.onAppear)
     }
-        
-    @ViewBuilder
+    
     private var content: some View {
         ScrollView(showsIndicators: false) {
             VStack {
@@ -29,16 +29,8 @@ struct HomeView: View {
         ForEach(viewModel.posts, id: \.uuid) { post in
             PostView(post: post) {
                 viewModel.repost(post)
-            } onQuote: {
-                viewModel.quote(post)
             }
         }
     }
     
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        return HomeView(viewModel: .init())
-    }
 }

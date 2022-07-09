@@ -6,21 +6,37 @@
 //
 
 import Foundation
+import Combine
 
 extension HomeView {
     
     class ViewModel: ObservableObject {
         
-        @Published var posts = [
-            PostModel(uuid: "48962489z29", content: "As a programmer, what is your most visited website?", createdAt: Date(), user: UserModel(uuid: "4284872", username: "@eljholiveira", profilePicture: "user1", createdAt: Date(), isCurrent: true), source: .post, earliestPosts: [])
-        ]
+        @Published var posts: [PostModel] = []
         
-        func repost(_ post: PostModel) {
-            
+        private let submitable: PostSubmitable
+        private let fetchable: PostFetchable
+        
+        private var cancellables = [AnyCancellable]()
+        
+        init(submitable: PostSubmitable, fetchable: PostFetchable) {
+            self.submitable = submitable
+            self.fetchable = fetchable
         }
         
-        func quote(_ post: PostModel) {
-            
+        func onAppear() {
+            fetchPosts()
+        }
+        
+        func repost(_ post: PostModel) {
+            submitable.repost(post: post)
+        }
+        
+        private func fetchPosts() {
+            fetchable.getPosts()
+                .sink { _ in } receiveValue: { [weak self] posts in
+                    self?.posts = posts
+                }.store(in: &cancellables)
         }
         
     }

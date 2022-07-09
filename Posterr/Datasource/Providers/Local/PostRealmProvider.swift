@@ -28,5 +28,13 @@ final class PostRealmProvider: PostProvider, Loggable {
         }.eraseToAnyPublisher()
     }
     
+    func getAllPosts() -> AnyPublisher<[PostModel], Error> {
+        dbManager.fetch(PostEntity.self, predicate: nil, sorted: nil)
+            .tryMap { entities in
+                entities.map { PostModel.mapFromPersistenceObject($0) }
+            }
+            .eraseToAnyPublisher()
+    }
+    
 }
 

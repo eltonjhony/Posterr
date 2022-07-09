@@ -11,17 +11,18 @@ import Combine
 extension AddPostView {
     
     class ViewModel: ObservableObject {
-        
         @Published var currentUser: UserModel?
         @Published var content: String = ""
         @Published var dismiss: Bool = false
         
+        private let type: AddPostView.SubmissionType
         private let userRepository: UserRepository
         private let usecase: PostSubmitable
         
         private var cancellables = [AnyCancellable]()
         
-        init(userRepository: UserRepository, usecase: PostSubmitable) {
+        init(type: AddPostView.SubmissionType, userRepository: UserRepository, usecase: PostSubmitable) {
+            self.type = type
             self.userRepository = userRepository
             self.usecase = usecase
             
@@ -33,7 +34,14 @@ extension AddPostView {
         }
         
         func submitPost() {
-            usecase.post(with: content)
+            switch type {
+            case .post:
+                usecase.post(with: content)
+            case let .repost(post):
+                usecase.repost(post: post)
+            case let .quote(post):
+                usecase.quote(of: post, with: content)
+            }
         }
         
         private func fetchCurrentUser() {

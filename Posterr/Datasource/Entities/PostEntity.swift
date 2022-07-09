@@ -14,5 +14,5 @@ public final class PostEntity: Object {
     @Persisted var createdAt: Date
     @Persisted var user: UserEntity?
     @Persisted var source: String
-    @Persisted var earliestPosts: List<PostEntity>
+    @Persisted var originalPosts: List<PostEntity>
 }

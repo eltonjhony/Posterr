@@ -17,7 +17,7 @@ public struct PostModel: ModelProtocol {
     let createdAt: Date
     let user: UserModel?
     let source: SourceType
-    let earliestPosts: [PostModel]
+    let originalPosts: [PostModel]
 }
 
 extension PostModel: MappableProtocol {
@@ -28,7 +28,7 @@ extension PostModel: MappableProtocol {
         entity.createdAt = createdAt
         entity.user = user?.mapToPersistenceObject()
         entity.source = source.rawValue
-        entity.earliestPosts.append(objectsIn: earliestPosts.map { $0.mapToPersistenceObject() })
+        entity.originalPosts.append(objectsIn: originalPosts.map { $0.mapToPersistenceObject() })
         return entity
     }
 
@@ -39,7 +39,7 @@ extension PostModel: MappableProtocol {
             createdAt: object.createdAt,
             user: object.user != nil ? UserModel.mapFromPersistenceObject(object.user!) : nil,
             source: SourceType(rawValue: object.source) ?? .post,
-            earliestPosts: object.earliestPosts.map {
+            originalPosts: object.originalPosts.map {
                 PostModel.mapFromPersistenceObject($0)
             }
         )

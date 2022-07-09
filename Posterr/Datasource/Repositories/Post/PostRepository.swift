@@ -10,4 +10,5 @@ import Combine
 
 public protocol PostRepository {
     func addPost(_ post: PostModel) -> AnyPublisher<PostModel, Error>
+    func getAllPosts() -> AnyPublisher<[PostModel], Error>
 }

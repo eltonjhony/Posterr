@@ -19,7 +19,12 @@ struct NavBarModifier: ViewModifier {
                 .padding(.top, .statusBarHeight)
             content
                 .sheet(isPresented: $showAddPost) {
-                    AddPostView()
+                    AddPostView(
+                        viewModel: PosterrAssembler.resolve(
+                            AddPostView.ViewModel.self,
+                            argument: AddPostView.SubmissionType.post
+                        )
+                    )
                 }
         }
         .edgesIgnoringSafeArea(.top)

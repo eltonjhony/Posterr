@@ -66,6 +66,7 @@
 		53FEFF4E287A1CC40016B21C /* PostRealmProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF4D287A1CC40016B21C /* PostRealmProvider.swift */; };
 		53FEFF50287A1D1F0016B21C /* PostEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF4F287A1D1F0016B21C /* PostEntity.swift */; };
 		53FEFF52287A1FF50016B21C /* DefaultPostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF51287A1FF50016B21C /* DefaultPostRepository.swift */; };
+		53FEFF58287A437D0016B21C /* PostFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF57287A437D0016B21C /* PostFetchable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +137,7 @@
 		53FEFF4D287A1CC40016B21C /* PostRealmProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRealmProvider.swift; sourceTree = "<group>"; };
 		53FEFF4F287A1D1F0016B21C /* PostEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEntity.swift; sourceTree = "<group>"; };
 		53FEFF51287A1FF50016B21C /* DefaultPostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPostRepository.swift; sourceTree = "<group>"; };
+		53FEFF57287A437D0016B21C /* PostFetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFetchable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,7 +186,6 @@
 				53FEFEEC2879E5C80016B21C /* Core */,
 				53FEFF1C287A04200016B21C /* Datasource */,
 				53FEFF3C287A0FE70016B21C /* Domain */,
-				53FEFEC02879C2FF0016B21C /* Views */,
 				53FEFECA2879D1040016B21C /* Features */,
 				53FEFE922879AFCF0016B21C /* PosterrApp.swift */,
 				53FEFE962879AFD10016B21C /* Assets.xcassets */,
@@ -209,32 +210,13 @@
 			path = PosterrTests;
 			sourceTree = "<group>";
 		};
-		53FEFEC02879C2FF0016B21C /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				53FEFEC52879C8C80016B21C /* Components */,
-				53FEFEC12879C30C0016B21C /* PostView.swift */,
-				53FEFECF2879D16D0016B21C /* BottomNavigationView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		53FEFEC52879C8C80016B21C /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				53FEFEC62879C8D70016B21C /* ProfilePicture.swift */,
-				53FEFEC82879C94A0016B21C /* ProfileIdentification.swift */,
-				53FEFEEA2879DD300016B21C /* TextArea.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
 		53FEFECA2879D1040016B21C /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				53FEFEE22879DA2F0016B21C /* AddPost */,
 				53FEFED82879D40C0016B21C /* Home */,
 				53FEFED72879D4050016B21C /* Profile */,
+				53FEFEE22879DA2F0016B21C /* AddPost */,
+				53FEFF56287A347A0016B21C /* Feed */,
 				53FEFED62879D3FA0016B21C /* TabBar */,
 			);
 			path = Features;
@@ -359,6 +341,7 @@
 		53FEFF1D287A043E0016B21C /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				53FEFF55287A338C0016B21C /* Views */,
 				53FEFEDB2879D74F0016B21C /* Modifiers */,
 				53FEFED12879D2400016B21C /* Shapes */,
 			);
@@ -458,6 +441,7 @@
 			children = (
 				53FEFF3E287A101B0016B21C /* UserRegistrable.swift */,
 				53FEFF46287A17C90016B21C /* PostSubmitable.swift */,
+				53FEFF57287A437D0016B21C /* PostFetchable.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -469,6 +453,25 @@
 				53FEFF51287A1FF50016B21C /* DefaultPostRepository.swift */,
 			);
 			path = Post;
+			sourceTree = "<group>";
+		};
+		53FEFF55287A338C0016B21C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				53FEFECF2879D16D0016B21C /* BottomNavigationView.swift */,
+				53FEFEC62879C8D70016B21C /* ProfilePicture.swift */,
+				53FEFEC82879C94A0016B21C /* ProfileIdentification.swift */,
+				53FEFEEA2879DD300016B21C /* TextArea.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		53FEFF56287A347A0016B21C /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				53FEFEC12879C30C0016B21C /* PostView.swift */,
+			);
+			path = Feed;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -603,6 +606,7 @@
 				53FEFF132879FC960016B21C /* RealmProvider.swift in Sources */,
 				53FEFEDD2879D7660016B21C /* NavBarModifier.swift in Sources */,
 				53FEFF3B287A0F5B0016B21C /* DefaultUserRepository.swift in Sources */,
+				53FEFF58287A437D0016B21C /* PostFetchable.swift in Sources */,
 				53FEFEBD2879B6530016B21C /* UserModel.swift in Sources */,
 				53FEFEE12879D86D0016B21C /* ViewModfier+Factory.swift in Sources */,
 				53FEFF072879E9390016B21C /* ProfileViewModel.swift in Sources */,

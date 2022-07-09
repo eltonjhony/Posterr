@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct AddPostView: View {
-    @ObservedObject var viewModel: ViewModel = PosterrAssembler.resolve(AddPostView.ViewModel.self)
+    @ObservedObject var viewModel: ViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
@@ -40,5 +40,11 @@ struct AddPostView: View {
         .onChange(of: viewModel.dismiss) { newValue in
             presentationMode.wrappedValue.dismiss()
         }
+    }
+    
+    enum SubmissionType {
+        case post
+        case repost(PostModel)
+        case quote(PostModel)
     }
 }

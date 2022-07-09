@@ -40,7 +40,9 @@ final class PostSubmitableUseCase: PostSubmitable, Loggable {
     
     func post(with content: String) {
         userRepository.getCurrentUser()
-            .flatMap { self.submitPost(for: $0, with: content) }
+            .flatMap {
+                self.submitPost(for: $0, with: .init(content: content))
+            }
             .sink {
                 if case let .failure(error) = $0 {
                     //TODO: Handle error
@@ -52,23 +54,57 @@ final class PostSubmitableUseCase: PostSubmitable, Loggable {
     }
     
     func repost(post: PostModel) {
-        
+        userRepository.getCurrentUser()
+            .flatMap {
+                self.submitPost(for: $0, with: .init(source: .repost, originalPost: post))
+            }
+            .sink {
+                if case let .failure(error) = $0 {
+                    //TODO: Handle error
+                    debugPrint(error)
+                }
+            } receiveValue: { [weak self] model in
+                self?.didPost.send(model)
+            }.store(in: &cancellables)
     }
     
     func quote(of post: PostModel, with content: String) {
-        
+        userRepository.getCurrentUser()
+            .flatMap {
+                self.submitPost(for: $0, with: .init(content: content, source: .quote, originalPost: post))
+            }
+            .sink {
+                if case let .failure(error) = $0 {
+                    //TODO: Handle error
+                    debugPrint(error)
+                }
+            } receiveValue: { [weak self] model in
+                self?.didPost.send(model)
+            }.store(in: &cancellables)
     }
     
-    private func submitPost(for user: UserModel, with content: String, source: SourceType = .post) -> AnyPublisher<PostModel, Error> {
+    private func submitPost(for user: UserModel, with request: SubmitRequest) -> AnyPublisher<PostModel, Error> {
         let post = PostModel(
             uuid: UUID().uuidString,
-            content: content,
+            content: request.content,
             createdAt: Date(),
             user: user,
-            source: .post,
-            earliestPosts: []
+            source: request.source,
+            originalPosts: request.originalPost != nil ? [request.originalPost!] : []
         )
         return postRepository.addPost(post)
+    }
+    
+    private struct SubmitRequest {
+        let content: String?
+        let source: SourceType
+        let originalPost: PostModel?
+        
+        init(content: String? = nil, source: SourceType = .post, originalPost: PostModel? = nil) {
+            self.content = content
+            self.source = source
+            self.originalPost = originalPost
+        }
     }
 
 }
