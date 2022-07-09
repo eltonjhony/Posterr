@@ -18,7 +18,7 @@ struct AddPostView: View {
                     Spacer()
                     Spacer()
                     Button {
-                        
+                        viewModel.submitPost()
                     } label: {
                         Text("Post")
                     }

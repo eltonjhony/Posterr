@@ -11,6 +11,15 @@ import SwiftUI
 struct PostView: View {
     let post: PostModel
     
+    let onRepost: ActionCompletion?
+    let onQuote: ActionCompletion?
+    
+    init(post: PostModel, onRepost: ActionCompletion? = nil, onQuote: ActionCompletion? = nil) {
+        self.post = post
+        self.onRepost = onRepost
+        self.onQuote = onQuote
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
             if case .repost = post.source {
@@ -52,8 +61,14 @@ struct PostView: View {
     
     private var actions: some View {
         HStack(spacing: 24) {
-            Image(systemName: "signpost.left")
-            Image(systemName: "quote.bubble")
+            if let onRepost = onRepost {
+                Image(systemName: "signpost.left")
+                    .behaviour(.touchable(onRepost))
+            }
+            if let onQuote = onQuote {
+                Image(systemName: "quote.bubble")
+                    .behaviour(.touchable(onQuote))
+            }
             Spacer()
         }
         .padding(.vertical, 4)

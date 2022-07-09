@@ -7,8 +7,16 @@
 
 import Foundation
 
+typealias ActionCompletion = () -> Void
+
 extension StyleModifier {
     static func navBar(title: String) -> StyleModifier<T> where T == NavBarModifier {
         .init(modifier: T(title: title))
+    }
+}
+
+extension BehaviorModifier {
+    static func touchable(_ action: @escaping ActionCompletion) -> BehaviorModifier<T> where T == Touchable {
+        .init(modifier: T(action: action))
     }
 }

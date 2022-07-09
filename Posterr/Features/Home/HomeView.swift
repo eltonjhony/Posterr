@@ -27,8 +27,11 @@ struct HomeView: View {
     
     private var timeline: some View {
         ForEach(viewModel.posts, id: \.uuid) { post in
-            PostView(post: post)
-                .frame(width: UIScreen.main.bounds.width, alignment: .center)
+            PostView(post: post) {
+                viewModel.repost(post)
+            } onQuote: {
+                viewModel.quote(post)
+            }
         }
     }
     
