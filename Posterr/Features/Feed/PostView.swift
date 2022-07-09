@@ -11,26 +11,36 @@ import SwiftUI
 struct PostView: View {
     let post: PostModel
     
+    var isFromFeed: Bool = true
     var onRepost: ActionCompletion? = nil
     
     @State var showQuote: Bool = false
     
     var body: some View {
-        VStack(alignment: .leading) {
-            if let user = post.user {
-                if case .repost = post.source {
-                    Text("Repost from \(user.username)")
-                }
-                HStack(alignment: .top) {
-                    ProfilePicture(picture: user.profilePicture)
-                    VStack(alignment: .leading) {
-                        ProfileIdentification(username: user.username)
-                        content
+        ZStack(alignment: .bottom) {
+            VStack(alignment: .leading) {
+                if let user = post.user {
+                    if case .repost = post.source {
+                        Text("Repost from \(user.username)")
+                    }
+                    HStack(alignment: .top) {
+                        ProfilePicture(picture: user.profilePicture)
+                        VStack(alignment: .leading) {
+                            ProfileIdentification(username: user.username)
+                            content
+                        }
                     }
                 }
             }
+            .padding()
+            
+            if isFromFeed {
+                Rectangle()
+                    .frame(height: 1, alignment: .center)
+                    .background(Color.cyan)
+            }
+            
         }
-        .padding(.horizontal)
         .sheet(isPresented: $showQuote) {
             AddPostView(
                 viewModel: PosterrAssembler.resolve(
@@ -48,11 +58,10 @@ struct PostView: View {
             if case .quote = post.source {
                 VStack {
                     if let originalPost = post.originalPosts.first {
-                        PostView(post: originalPost)
+                        PostView(post: originalPost, isFromFeed: false)
                     }
                 }
                 .frame(maxWidth: .infinity)
-                .padding()
                 .background(Color.clear)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
@@ -64,17 +73,20 @@ struct PostView: View {
         }
     }
     
+    @ViewBuilder
     private var actions: some View {
-        HStack(spacing: 24) {
-            if let onRepost = onRepost {
-                Image(systemName: "signpost.left")
-                    .behaviour(.touchable(onRepost))
+        if isFromFeed {
+            HStack(spacing: 24) {
+                if let onRepost = onRepost {
+                    Image(systemName: "signpost.left")
+                        .behaviour(.touchable(onRepost))
+                }
+                Image(systemName: "quote.bubble")
+                    .behaviour(.touchable({showQuote.toggle()}))
+                Spacer()
             }
-            Image(systemName: "quote.bubble")
-                .behaviour(.touchable({showQuote.toggle()}))
-            Spacer()
+            .padding(.vertical, 4)
         }
-        .padding(.vertical, 4)
     }
     
 }
