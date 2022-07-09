@@ -14,13 +14,18 @@ extension AddPostView {
         
         @Published var currentUser: UserModel?
         @Published var content: String = ""
+        @Published var dismiss: Bool = false
         
         private let userRepository: UserRepository
+        private let usecase: PostSubmitable
         
         private var cancellables = [AnyCancellable]()
         
-        init(userRepository: UserRepository) {
+        init(userRepository: UserRepository, usecase: PostSubmitable) {
             self.userRepository = userRepository
+            self.usecase = usecase
+            
+            registerForSubmitableUpdates()
         }
         
         func onAppear() {
@@ -28,19 +33,20 @@ extension AddPostView {
         }
         
         func submitPost() {
-            
+            usecase.post(with: content)
         }
         
         private func fetchCurrentUser() {
             userRepository.getCurrentUser()
-                .sink {
-                    if case let .failure(error) = $0 {
-                        //TODO: Handle error
-                        debugPrint(error)
-                    }
-                } receiveValue: { [weak self] model in
+                .sink { _ in } receiveValue: { [weak self] model in
                     self?.currentUser = model
                 }.store(in: &cancellables)
+        }
+        
+        private func registerForSubmitableUpdates() {
+            usecase.didPost.sink { [weak self] _ in
+                self?.dismiss.toggle()
+            }.store(in: &cancellables)
         }
         
     }

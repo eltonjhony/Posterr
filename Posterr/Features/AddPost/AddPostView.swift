@@ -9,7 +9,8 @@ import Foundation
 import SwiftUI
 
 struct AddPostView: View {
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel = PosterrAssembler.resolve(AddPostView.ViewModel.self)
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         VStack {
@@ -36,5 +37,8 @@ struct AddPostView: View {
         }
         .padding()
         .onAppear(perform: viewModel.onAppear)
+        .onChange(of: viewModel.dismiss) { newValue in
+            presentationMode.wrappedValue.dismiss()
+        }
     }
 }

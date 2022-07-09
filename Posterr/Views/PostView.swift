@@ -22,14 +22,16 @@ struct PostView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            if case .repost = post.source {
-                Text("Repost from \(post.user.username)")
-            }
-            HStack(alignment: .top) {
-                ProfilePicture(picture: post.user.profilePicture)
-                VStack(alignment: .leading) {
-                    ProfileIdentification(username: post.user.username)
-                    content
+            if let user = post.user {
+                if case .repost = post.source {
+                    Text("Repost from \(user.username)")
+                }
+                HStack(alignment: .top) {
+                    ProfilePicture(picture: user.profilePicture)
+                    VStack(alignment: .leading) {
+                        ProfileIdentification(username: user.username)
+                        content
+                    }
                 }
             }
         }
