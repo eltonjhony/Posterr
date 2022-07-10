@@ -21,6 +21,19 @@ extension AddPostView {
         
         private var cancellables = [AnyCancellable]()
         
+        var originalPost: PostModel? {
+            switch type {
+            case let .quote(post), let .repost(post):
+                return post
+            default:
+                return nil
+            }
+        }
+        
+        var placeholderText: String {
+            type == .post ? "What's happening" : "Add a comment"
+        }
+        
         init(type: AddPostView.SubmissionType, userRepository: UserRepository, usecase: PostSubmitable) {
             self.type = type
             self.userRepository = userRepository

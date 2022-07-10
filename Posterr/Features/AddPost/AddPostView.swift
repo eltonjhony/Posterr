@@ -17,7 +17,6 @@ struct AddPostView: View {
             VStack {
                 HStack {
                     Spacer()
-                    Spacer()
                     Button {
                         viewModel.submitPost()
                     } label: {
@@ -29,10 +28,18 @@ struct AddPostView: View {
                     if let profilePicture = viewModel.currentUser?.profilePicture {
                         ProfilePicture(picture: profilePicture)
                     }
-                    
-                    TextArea(placeholder: "What's happening", text: $viewModel.content)
+                    TextArea(placeholder: viewModel.placeholderText, text: $viewModel.content)
+                }
+                
+            }
+            
+            if let originalPost = viewModel.originalPost {
+                HStack {
+                    Spacer()
+                    PostView(post: originalPost, isFromFeed: false)
                 }
             }
+            
             Spacer()
         }
         .padding()
@@ -42,7 +49,7 @@ struct AddPostView: View {
         }
     }
     
-    enum SubmissionType {
+    enum SubmissionType: Equatable {
         case post
         case repost(PostModel)
         case quote(PostModel)

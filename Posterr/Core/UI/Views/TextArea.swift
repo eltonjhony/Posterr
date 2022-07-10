@@ -9,6 +9,12 @@ import Foundation
 import SwiftUI
 
 struct TextArea: View {
+    enum FocusField: Hashable {
+        case field
+    }
+    
+    @FocusState var focusedField: FocusField?
+    
     let placeholder: String
     @Binding var text: String
     
@@ -16,6 +22,12 @@ struct TextArea: View {
     var body: some View {
         ZStack(alignment: .top) {
             TextEditor(text: $text)
+                .focused($focusedField, equals: .field)
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                        self.focusedField = .field
+                    }
+                }
             HStack {
                 if text.isBlank {
                     Text(placeholder)
