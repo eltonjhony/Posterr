@@ -18,17 +18,11 @@ struct HomeView: View {
     }
     
     private var content: some View {
-        ScrollView(showsIndicators: false) {
-            VStack {
-                timeline
-            }
-        }
-    }
-    
-    private var timeline: some View {
-        ForEach(viewModel.posts, id: \.uuid) { post in
-            PostView(post: post) {
-                viewModel.repost(post)
+        ScrollView {
+            ForEach(viewModel.posts, id: \.uuid) { post in
+                PostView(post: post) {
+                    viewModel.repost(post)
+                }
             }
         }
     }

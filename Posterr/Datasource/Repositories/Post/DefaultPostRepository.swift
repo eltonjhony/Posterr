@@ -28,4 +28,8 @@ final class DefaultPostRepository: PostRepository {
         provider.getAllPosts()
     }
     
+    func getPosts(by userId: String) -> AnyPublisher<[PostModel], Error> {
+        provider.getPosts(by: userId)
+    }
+    
 }

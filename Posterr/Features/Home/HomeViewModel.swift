@@ -14,14 +14,14 @@ extension HomeView {
         
         @Published var posts: [PostModel] = []
         
-        private let submitable: PostSubmitable
-        private let fetchable: PostFetchable
+        private let repository: PostRepository
+        private let usecase: PostSubmitable
         
         private var cancellables = [AnyCancellable]()
         
-        init(submitable: PostSubmitable, fetchable: PostFetchable) {
-            self.submitable = submitable
-            self.fetchable = fetchable
+        init(usecase: PostSubmitable, repository: PostRepository) {
+            self.usecase = usecase
+            self.repository = repository
             
             registerForSubmitableUpdates()
         }
@@ -31,18 +31,18 @@ extension HomeView {
         }
         
         func repost(_ post: PostModel) {
-            submitable.repost(post: post)
+            usecase.repost(post: post)
         }
         
         private func fetchPosts() {
-            fetchable.getPosts()
+            repository.getAllPosts()
                 .sink { _ in } receiveValue: { [weak self] posts in
                     self?.posts = posts
                 }.store(in: &cancellables)
         }
         
         private func registerForSubmitableUpdates() {
-            submitable.didPost.sink { [weak self] _ in
+            usecase.didPost.sink { [weak self] _ in
                 self?.fetchPosts()
             }.store(in: &cancellables)
         }

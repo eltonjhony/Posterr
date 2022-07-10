@@ -15,6 +15,7 @@ extension Date {
         case yyyMMdd = "yyy-MM-dd"
         case yyyyMMdd = "yyyy-MM-dd"
         case EEEEddMMM = "EEEE, dd MMMM"
+        case MMMMddyyyy = "MMMM dd, yyyy"
         case hhmma = "hh:mm a"
         case hhmm = "hh:mm"
         case dd = "dd"

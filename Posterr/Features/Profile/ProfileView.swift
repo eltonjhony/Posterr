@@ -34,11 +34,12 @@ struct ProfileView: View {
     
     private var profilePicture: some View {
         VStack {
-            Image("user1")
-                .resizable()
-                .scaledToFill()
-                .clipped()
-                
+            if let user = viewModel.data?.currentUser {
+                Image(user.profilePicture)
+                    .resizable()
+                    .scaledToFill()
+                    .clipped()
+            }
         }
         .frame(width: 90, height: 90, alignment: .center)
         .cornerRadius(80)
@@ -48,42 +49,41 @@ struct ProfileView: View {
         )
     }
     
+    @ViewBuilder
     private var content: some View {
-        VStack {
-            Text("ELTON OLIVEIRA")
-            Text("Joined July 2022")
-            countingPosts
-            timeline.padding(.vertical)
-            Spacer()
+        if let data = viewModel.data {
+            VStack {
+                Text(data.currentUser.username)
+                Text(data.joinerDate)
+                countPosts.padding(.vertical)
+                ScrollView {
+                    ForEach(data.posts, id: \.uuid) { post in
+                        PostView(post: post) {
+                            viewModel.repost(post)
+                        }
+                    }
+                }.padding(.vertical)
+                Spacer()
+            }
         }
     }
     
-    private var countingPosts: some View {
+    private var countPosts: some View {
         HStack(spacing: 16) {
-            
-            HStack(spacing: 2) {
-                Text("3")
-                Text("post")
-            }
-            
-            HStack(spacing: 2) {
-                Text("4")
-                Text("repost")
-            }
-            
-            HStack(spacing: 2) {
-                Text("1")
-                Text("quote")
-            }
-            
-        }
-    }
-    
-    private var timeline: some View {
-        ScrollView {
-            ForEach(viewModel.posts, id: \.uuid) { post in
-                PostView(post: post) {
-                    viewModel.repost(post)
+            if let data = viewModel.data {
+                HStack(spacing: 2) {
+                    Text("\(data.postsCount)")
+                    Text("post")
+                }
+                
+                HStack(spacing: 2) {
+                    Text("\(data.repostCount)")
+                    Text("repost")
+                }
+                
+                HStack(spacing: 2) {
+                    Text("\(data.quoteCount)")
+                    Text("quote-posts")
                 }
             }
         }

@@ -12,6 +12,8 @@ final class PostRealmProvider: PostProvider, Loggable {
     
     private let dbManager: DBManager
     
+    private let sortingByCreatedDate = Sorted(key: "createdAt", ascending: false)
+    
     init(dbManager: DBManager) {
         self.dbManager = dbManager
     }
@@ -29,7 +31,19 @@ final class PostRealmProvider: PostProvider, Loggable {
     }
     
     func getAllPosts() -> AnyPublisher<[PostModel], Error> {
-        dbManager.fetch(PostEntity.self, predicate: nil, sorted: Sorted(key: "createdAt", ascending: false))
+        dbManager.fetch(PostEntity.self, predicate: nil, sorted: sortingByCreatedDate)
+            .tryMap { entities in
+                entities.map { PostModel.mapFromPersistenceObject($0) }
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func getPosts(by userId: String) -> AnyPublisher<[PostModel], Error> {
+        let predicate = NSPredicate(format: "user.uuid == %@", userId)
+        return dbManager.fetch(
+            PostEntity.self,
+            predicate: predicate,
+            sorted: sortingByCreatedDate)
             .tryMap { entities in
                 entities.map { PostModel.mapFromPersistenceObject($0) }
             }

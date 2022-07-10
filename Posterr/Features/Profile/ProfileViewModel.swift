@@ -12,39 +12,37 @@ extension ProfileView {
     
     class ViewModel: ObservableObject {
         
-        @Published var posts: [PostModel] = []
+        @Published var data: ProfileInfoModel?
         
-        private let submitable: PostSubmitable
-        private let fetchable: PostFetchable
+        private let repository: PostRepository
+        private let usecase: PostSubmitable
+        private let fetchable: ProfileInfoFetchable
         
         private var cancellables = [AnyCancellable]()
         
-        init(submitable: PostSubmitable, fetchable: PostFetchable) {
-            self.submitable = submitable
+        init(usecase: PostSubmitable, repository: PostRepository, fetchable: ProfileInfoFetchable) {
+            self.usecase = usecase
+            self.repository = repository
             self.fetchable = fetchable
-            
-            registerForSubmitableUpdates()
+            registerForUpdates()
         }
         
         func onAppear() {
-            fetchMyPosts()
+            fetchable.fetchProfileData()
         }
         
         func repost(_ post: PostModel) {
-            submitable.repost(post: post)
+            usecase.repost(post: post)
         }
         
-        private func fetchMyPosts() {
-            fetchable.getPosts()
-                .sink { _ in } receiveValue: { [weak self] posts in
-                    self?.posts = posts
-                }.store(in: &cancellables)
-        }
-        
-        private func registerForSubmitableUpdates() {
-            submitable.didPost.sink { [weak self] _ in
-                self?.fetchMyPosts()
+        private func registerForUpdates() {
+            usecase.didPost.sink { [weak self] _ in
+                self?.fetchable.fetchProfileData()
             }.store(in: &cancellables)
+            
+            fetchable.data
+                .assign(to: \.data, on: self)
+                .store(in: &cancellables)
         }
     }
     

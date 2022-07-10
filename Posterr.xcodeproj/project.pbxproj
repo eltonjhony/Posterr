@@ -66,7 +66,8 @@
 		53FEFF4E287A1CC40016B21C /* PostRealmProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF4D287A1CC40016B21C /* PostRealmProvider.swift */; };
 		53FEFF50287A1D1F0016B21C /* PostEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF4F287A1D1F0016B21C /* PostEntity.swift */; };
 		53FEFF52287A1FF50016B21C /* DefaultPostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF51287A1FF50016B21C /* DefaultPostRepository.swift */; };
-		53FEFF58287A437D0016B21C /* PostFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF57287A437D0016B21C /* PostFetchable.swift */; };
+		53FEFF63287B5D0C0016B21C /* ProfileInfoFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF62287B5D0C0016B21C /* ProfileInfoFetchable.swift */; };
+		53FEFF66287B662F0016B21C /* ProfileInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF65287B662F0016B21C /* ProfileInfoModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,7 +138,8 @@
 		53FEFF4D287A1CC40016B21C /* PostRealmProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRealmProvider.swift; sourceTree = "<group>"; };
 		53FEFF4F287A1D1F0016B21C /* PostEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEntity.swift; sourceTree = "<group>"; };
 		53FEFF51287A1FF50016B21C /* DefaultPostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPostRepository.swift; sourceTree = "<group>"; };
-		53FEFF57287A437D0016B21C /* PostFetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFetchable.swift; sourceTree = "<group>"; };
+		53FEFF62287B5D0C0016B21C /* ProfileInfoFetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoFetchable.swift; sourceTree = "<group>"; };
+		53FEFF65287B662F0016B21C /* ProfileInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -431,6 +433,7 @@
 		53FEFF3C287A0FE70016B21C /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				53FEFF64287B66150016B21C /* Models */,
 				53FEFF3D287A10040016B21C /* UseCases */,
 			);
 			path = Domain;
@@ -441,7 +444,7 @@
 			children = (
 				53FEFF3E287A101B0016B21C /* UserRegistrable.swift */,
 				53FEFF46287A17C90016B21C /* PostSubmitable.swift */,
-				53FEFF57287A437D0016B21C /* PostFetchable.swift */,
+				53FEFF62287B5D0C0016B21C /* ProfileInfoFetchable.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -472,6 +475,14 @@
 				53FEFEC12879C30C0016B21C /* PostView.swift */,
 			);
 			path = Feed;
+			sourceTree = "<group>";
+		};
+		53FEFF64287B66150016B21C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				53FEFF65287B662F0016B21C /* ProfileInfoModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -595,6 +606,7 @@
 				53FEFECC2879D1150016B21C /* TabBarView.swift in Sources */,
 				53FEFE932879AFCF0016B21C /* PosterrApp.swift in Sources */,
 				53FEFED52879D3040016B21C /* TabBarViewModel.swift in Sources */,
+				53FEFF63287B5D0C0016B21C /* ProfileInfoFetchable.swift in Sources */,
 				53FEFF45287A14770016B21C /* CoreRegistration.swift in Sources */,
 				53FEFF172879FD0F0016B21C /* DBManager.swift in Sources */,
 				53FEFF41287A13970016B21C /* DomainRegistration.swift in Sources */,
@@ -606,7 +618,6 @@
 				53FEFF132879FC960016B21C /* RealmProvider.swift in Sources */,
 				53FEFEDD2879D7660016B21C /* NavBarModifier.swift in Sources */,
 				53FEFF3B287A0F5B0016B21C /* DefaultUserRepository.swift in Sources */,
-				53FEFF58287A437D0016B21C /* PostFetchable.swift in Sources */,
 				53FEFEBD2879B6530016B21C /* UserModel.swift in Sources */,
 				53FEFEE12879D86D0016B21C /* ViewModfier+Factory.swift in Sources */,
 				53FEFF072879E9390016B21C /* ProfileViewModel.swift in Sources */,
@@ -634,6 +645,7 @@
 				53FEFEDF2879D82F0016B21C /* ViewModifier.swift in Sources */,
 				53FEFEEB2879DD300016B21C /* TextArea.swift in Sources */,
 				53FEFF2F287A06BB0016B21C /* CustomLogger.swift in Sources */,
+				53FEFF66287B662F0016B21C /* ProfileInfoModel.swift in Sources */,
 				53FEFF4C287A1CAA0016B21C /* PostProvider.swift in Sources */,
 				53FEFEE62879DAF90016B21C /* AddPostViewModel.swift in Sources */,
 				53FEFECE2879D1200016B21C /* TabBarItems.swift in Sources */,
