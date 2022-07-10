@@ -22,7 +22,7 @@ struct BottomNavigationView: View {
         ZStack(alignment: .bottom) {
             TabView(selection: $selectedTab) {
                 ForEach(tabs, id: \.index) { tab in
-                    tab.view
+                    tab.view.padding(.bottom)
                 }
             }
             customTabBar

@@ -56,7 +56,7 @@ struct NavBarModifier: ViewModifier {
 
 }
 
-private extension CGFloat {
+extension CGFloat {
     static let headerHeight: CGFloat = 84
     static var statusBarHeight = CGFloat(UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0)
 }
