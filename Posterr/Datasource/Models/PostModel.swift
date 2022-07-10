@@ -18,6 +18,10 @@ public struct PostModel: ModelProtocol {
     let user: UserModel?
     let source: SourceType
     let originalPosts: [PostModel]
+    
+    var isRepostable: Bool {
+        source != .repost
+    }
 }
 
 extension PostModel: MappableProtocol {

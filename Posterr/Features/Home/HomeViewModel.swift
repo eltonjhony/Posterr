@@ -22,6 +22,8 @@ extension HomeView {
         init(submitable: PostSubmitable, fetchable: PostFetchable) {
             self.submitable = submitable
             self.fetchable = fetchable
+            
+            registerForSubmitableUpdates()
         }
         
         func onAppear() {
@@ -37,6 +39,12 @@ extension HomeView {
                 .sink { _ in } receiveValue: { [weak self] posts in
                     self?.posts = posts
                 }.store(in: &cancellables)
+        }
+        
+        private func registerForSubmitableUpdates() {
+            submitable.didPost.sink { [weak self] _ in
+                self?.fetchPosts()
+            }.store(in: &cancellables)
         }
         
     }

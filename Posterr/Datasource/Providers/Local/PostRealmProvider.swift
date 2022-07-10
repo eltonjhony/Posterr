@@ -29,7 +29,7 @@ final class PostRealmProvider: PostProvider, Loggable {
     }
     
     func getAllPosts() -> AnyPublisher<[PostModel], Error> {
-        dbManager.fetch(PostEntity.self, predicate: nil, sorted: nil)
+        dbManager.fetch(PostEntity.self, predicate: nil, sorted: Sorted(key: "createdAt", ascending: false))
             .tryMap { entities in
                 entities.map { PostModel.mapFromPersistenceObject($0) }
             }

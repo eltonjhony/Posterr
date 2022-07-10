@@ -105,7 +105,7 @@ struct PostView: View {
         if isFromFeed {
             HStack(spacing: 24) {
                 Spacer()
-                if let onRepost = onRepost {
+                if let onRepost = onRepost, post.isRepostable {
                     Image(systemName: "signpost.left")
                         .behaviour(.touchable(onRepost))
                 }
