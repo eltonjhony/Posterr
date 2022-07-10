@@ -59,7 +59,9 @@ extension AddPostView {
         
         private func fetchCurrentUser() {
             userRepository.getCurrentUser()
-                .sink { _ in } receiveValue: { [weak self] model in
+                .sink { _ in
+                    //TODO: Handle errors
+                } receiveValue: { [weak self] model in
                     self?.currentUser = model
                 }.store(in: &cancellables)
         }

@@ -51,4 +51,3 @@ final class PostRealmProvider: PostProvider, Loggable {
     }
     
 }
-

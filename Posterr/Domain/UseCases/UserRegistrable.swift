@@ -6,8 +6,7 @@
 //
 
 import Foundation
-
-import typealias Combine.AnyPublisher
+import Combine
 
 public protocol UserRegistrable {
     func register()
@@ -18,6 +17,8 @@ final class UserRegistrableUseCase: UserRegistrable, Loggable {
     // MARK: - Private members
 
     private let userRepository: UserRepository
+    
+    private var cancellables = [AnyCancellable]()
 
     // MARK: - Initialization
 
@@ -28,6 +29,15 @@ final class UserRegistrableUseCase: UserRegistrable, Loggable {
     // MARK: - Action Methods
 
     func register() {
+        userRepository.getAllUsers()
+            .sink { _ in } receiveValue: { [weak self] users in
+                if users.isEmpty {
+                    self?.createFakeUsers()
+                }
+            }.store(in: &cancellables)
+    }
+    
+    private func createFakeUsers() {
         let fakeUsers = [
             UserModel(uuid: UUID().uuidString, username: "@maike143", profilePicture: "user1", createdAt: Date(), isCurrent: true),
             UserModel(uuid: UUID().uuidString, username: "@nickolas873", profilePicture: "user2", createdAt: Date(), isCurrent: false),

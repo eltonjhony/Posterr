@@ -117,4 +117,3 @@ public final class PosterrAssembler {
         return service
     }
 }
-

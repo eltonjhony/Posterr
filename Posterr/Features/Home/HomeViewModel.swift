@@ -36,7 +36,9 @@ extension HomeView {
         
         private func fetchPosts() {
             repository.getAllPosts()
-                .sink { _ in } receiveValue: { [weak self] posts in
+                .sink { _ in
+                    //TODO: Handle errors
+                } receiveValue: { [weak self] posts in
                     self?.posts = posts
                 }.store(in: &cancellables)
         }

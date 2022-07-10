@@ -39,7 +39,7 @@ final class ProfileInfoFetchableUseCase: ProfileInfoFetchable, Loggable {
     func fetchProfileData() {
         userRepository.getCurrentUser()
             .sink { _ in
-                
+                //TODO: Handle errors
             } receiveValue: { [weak self] user in
                 self?.fetchMyPosts(with: user)
             }
@@ -49,7 +49,7 @@ final class ProfileInfoFetchableUseCase: ProfileInfoFetchable, Loggable {
     private func fetchMyPosts(with user: UserModel) {
         postRepository.getPosts(by: user.uuid)
             .sink { _ in
-                
+                //TODO: Handle errors
             } receiveValue: { [weak self] posts in
                 self?.data.send(.init(currentUser: user, posts: posts))
             }
@@ -57,4 +57,3 @@ final class ProfileInfoFetchableUseCase: ProfileInfoFetchable, Loggable {
     }
     
 }
-

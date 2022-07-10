@@ -62,4 +62,3 @@ struct BottomNavigationView: View {
 extension CGFloat {
     static let tabBarHeight: CGFloat = 60
 }
-

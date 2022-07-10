@@ -54,7 +54,7 @@ struct ProfileView: View {
         if let data = viewModel.data {
             VStack {
                 Text(data.currentUser.username)
-                Text(data.joinerDate)
+                Text("Joined \(data.joinerDate)")
                 countPosts.padding(.vertical)
                 ScrollView {
                     ForEach(data.posts, id: \.uuid) { post in
@@ -73,16 +73,19 @@ struct ProfileView: View {
             if let data = viewModel.data {
                 HStack(spacing: 2) {
                     Text("\(data.postsCount)")
+                        .fontWeight(.semibold)
                     Text("post")
                 }
                 
                 HStack(spacing: 2) {
                     Text("\(data.repostCount)")
+                        .fontWeight(.semibold)
                     Text("repost")
                 }
                 
                 HStack(spacing: 2) {
                     Text("\(data.quoteCount)")
+                        .fontWeight(.semibold)
                     Text("quote-posts")
                 }
             }

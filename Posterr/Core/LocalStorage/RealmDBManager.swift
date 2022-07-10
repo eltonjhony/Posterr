@@ -13,17 +13,7 @@ enum RealmError: Error {
     case eitherRealmIsNilOrNotRealmSpecificModel
 }
 
-extension RealmError: LocalizedError {
-    public var errorDescription: String? {
-        switch self {
-        case .eitherRealmIsNilOrNotRealmSpecificModel:
-            return NSLocalizedString("eitherRealmIsNilOrNotRealmSpecificModel", comment: "eitherRealmIsNilOrNotRealmSpecificModel")
-        }
-    }
-}
-
-//MARK: - DataManager Implementation
-final class RealmDBManager {
+final class RealmDBManager: DBManager {
     
     //MARK: - Stored Properties
     private let realm: Realm?
@@ -31,14 +21,13 @@ final class RealmDBManager {
     init(_ realm: Realm?) {
         self.realm = realm
     }
-}
-
-extension RealmDBManager: DBManager {
     
-    //MARK: - Methods
+    //MARK: - Public Methods
     
     func save(object: Storable) throws {
-        guard let realm = realm, let object = object as? Object else { throw RealmError.eitherRealmIsNilOrNotRealmSpecificModel }
+        guard let realm = realm, let object = object as? Object else {
+            throw RealmError.eitherRealmIsNilOrNotRealmSpecificModel
+        }
         try realm.write {
             realm.add(object, update: .modified)
         }
@@ -54,14 +43,18 @@ extension RealmDBManager: DBManager {
     }
     
     func delete(object: Storable) throws {
-        guard let realm = realm, let object = object as? Object else { throw RealmError.eitherRealmIsNilOrNotRealmSpecificModel }
+        guard let realm = realm, let object = object as? Object else {
+            throw RealmError.eitherRealmIsNilOrNotRealmSpecificModel
+        }
         try realm.write {
             realm.delete(object)
         }
     }
     
     func deleteAll<T>(_ model: T.Type) throws where T : Storable {
-        guard let realm = realm, let model = model as? Object.Type else { throw RealmError.eitherRealmIsNilOrNotRealmSpecificModel }
+        guard let realm = realm, let model = model as? Object.Type else {
+            throw RealmError.eitherRealmIsNilOrNotRealmSpecificModel
+        }
         try realm.write {
             let objects = realm.objects(model)
             for object in objects {
@@ -86,5 +79,5 @@ extension RealmDBManager: DBManager {
             promisse(.success(objects.compactMap { $0 as? T }))
         }.eraseToAnyPublisher()
     }
+    
 }
-

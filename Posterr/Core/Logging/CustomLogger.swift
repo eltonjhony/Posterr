@@ -36,4 +36,3 @@ struct Log: Identifiable, CustomStringConvertible {
 
     public var description: String { "\(time) - \(message)'" }
 }
-

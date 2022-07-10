@@ -285,14 +285,14 @@
 			children = (
 				53FEFF30287A06DF0016B21C /* Extensions */,
 				53FEFF0F2879FC610016B21C /* LocalStorage */,
-				53FEFEED2879E5D90016B21C /* DI */,
+				53FEFEED2879E5D90016B21C /* Injection */,
 				53FEFF1D287A043E0016B21C /* UI */,
 				53FEFF2B287A06910016B21C /* Logging */,
 			);
 			path = Core;
 			sourceTree = "<group>";
 		};
-		53FEFEED2879E5D90016B21C /* DI */ = {
+		53FEFEED2879E5D90016B21C /* Injection */ = {
 			isa = PBXGroup;
 			children = (
 				53FEFF012879E8C10016B21C /* Modules */,
@@ -301,7 +301,7 @@
 				53FEFEF22879E6E50016B21C /* PosterrAssembler.swift */,
 				53FEFEF72879E75F0016B21C /* PosterrAssembly.swift */,
 			);
-			path = DI;
+			path = Injection;
 			sourceTree = "<group>";
 		};
 		53FEFF012879E8C10016B21C /* Modules */ = {
