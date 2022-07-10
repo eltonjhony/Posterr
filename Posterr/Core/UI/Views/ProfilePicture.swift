@@ -10,11 +10,12 @@ import SwiftUI
 
 struct ProfilePicture: View {
     let picture: String
+    var size: CGFloat = 60
     
     var body: some View {
         Image(picture)
             .resizable()
-            .frame(width: 60, height: 60)
+            .frame(width: size, height: size)
             .cornerRadius(80)
     }
 }

@@ -10,7 +10,7 @@ import RealmSwift
 
 public final class PostEntity: Object {
     @Persisted(primaryKey: true) var uuid: String
-    @Persisted var content: String?
+    @Persisted var content: String
     @Persisted var createdAt: Date
     @Persisted var user: UserEntity?
     @Persisted var source: String

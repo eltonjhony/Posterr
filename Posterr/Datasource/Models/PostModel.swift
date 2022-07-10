@@ -13,7 +13,7 @@ public enum SourceType: String, ModelProtocol {
 
 public struct PostModel: ModelProtocol {
     let uuid: String
-    let content: String?
+    let content: String
     let createdAt: Date
     let user: UserModel?
     let source: SourceType
