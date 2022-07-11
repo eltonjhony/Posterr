@@ -13,9 +13,17 @@ struct ProfilePicture: View {
     var size: CGFloat = 60
     
     var body: some View {
-        Image(picture)
-            .resizable()
-            .frame(width: size, height: size)
-            .cornerRadius(80)
+        VStack {
+            Image(picture)
+                .resizable()
+                .scaledToFill()
+                .clipped()
+        }
+        .frame(width: size, height: size, alignment: .center)
+        .cornerRadius(80)
+        .overlay(
+            RoundedRectangle(cornerRadius: 80)
+                .stroke(Color.white, lineWidth: 4)
+        )
     }
 }

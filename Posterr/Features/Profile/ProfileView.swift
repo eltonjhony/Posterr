@@ -32,21 +32,11 @@ struct ProfileView: View {
         .overlay(profilePicture, alignment: .bottom)
     }
     
+    @ViewBuilder
     private var profilePicture: some View {
-        VStack {
-            if let user = viewModel.data?.currentUser {
-                Image(user.profilePicture)
-                    .resizable()
-                    .scaledToFill()
-                    .clipped()
-            }
+        if let user = viewModel.data?.currentUser {
+            ProfilePicture(picture: user.profilePicture, size: 90)
         }
-        .frame(width: 90, height: 90, alignment: .center)
-        .cornerRadius(80)
-        .overlay(
-            RoundedRectangle(cornerRadius: 80)
-                .stroke(Color.white, lineWidth: 4)
-        )
     }
     
     @ViewBuilder
