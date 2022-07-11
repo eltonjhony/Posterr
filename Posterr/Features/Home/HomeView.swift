@@ -12,7 +12,7 @@ struct HomeView: View {
     
     var body: some View {
         content
-            .style(.navBar(title: "Posterr Feed"))
+            .style(.navBar(title: "Feed"))
             .edgesIgnoringSafeArea(.bottom)
             .onAppear(perform: viewModel.onAppear)
     }
@@ -20,7 +20,7 @@ struct HomeView: View {
     private var content: some View {
         ScrollView {
             ForEach(viewModel.posts, id: \.uuid) { post in
-                PostView(post: post) {
+                PostView(post: post, isFromCurrentUser: post.user == viewModel.currentUser) {
                     viewModel.repost(post)
                 }
             }

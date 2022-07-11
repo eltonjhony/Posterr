@@ -13,7 +13,6 @@ enum TabBarItems: Int {
 }
 
 struct HomeTab: NavTab {
-    let title = "Home"
     let image = "homeIcon"
     let index = TabBarItems.home.rawValue
     let view: AnyView
@@ -24,7 +23,6 @@ struct HomeTab: NavTab {
 }
 
 struct ProfileTab: NavTab {
-    let title = "Profile"
     let image = "profileIcon"
     let index = TabBarItems.profile.rawValue
     let view: AnyView

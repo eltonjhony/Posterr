@@ -8,7 +8,6 @@
 import SwiftUI
 
 protocol NavTab {
-    var title: String { get }
     var image: String { get }
     var index: Int { get }
     var view: AnyView { get }
@@ -40,11 +39,11 @@ struct BottomNavigationView: View {
                     label: {
                         VStack(spacing: 8) {
                             Image(tab.image)
+                                .resizable()
                                 .scaledToFit()
-                                .foregroundColor(selectedTab == tab.index ? Color.orange : Color.gray)
+                                .foregroundColor(selectedTab == tab.index ? .appPrimary : .contentInverted)
                                 .padding(.top, 16)
-                                .frame(width: 50)
-                            Text(tab.title)
+                                .frame(width: 45, height: 45)
                         }
                     }
                 )

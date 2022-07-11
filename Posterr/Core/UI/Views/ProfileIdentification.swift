@@ -14,6 +14,6 @@ struct ProfileIdentification: View {
     var body: some View {
         Text(username)
             .fontWeight(.semibold)
-            .foregroundColor(.gray.opacity(0.7))
+            .foregroundColor(.contentInverted)
     }
 }

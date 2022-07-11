@@ -21,7 +21,7 @@ struct DebugView: View {
                 }
                 .frame(width: UIScreen.main.bounds.width)
                 .padding()
-                .background(user.isCurrent ? Color.blue.opacity(0.4) : Color.white)
+                .background(user.isCurrent ? .appPrimary : Color.white)
                 .onTapGesture {
                     viewModel.select(new: user)
                 }

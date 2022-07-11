@@ -13,17 +13,20 @@ extension HomeView {
     class ViewModel: ObservableObject {
         
         @Published var posts: [PostModel] = []
+        @Published var currentUser: UserModel?
         
         private let repository: PostRepository
         private let usecase: PostUpdatable
+        private let userRegistrable: UserRegistrable
         
         private var cancellables = [AnyCancellable]()
         
-        init(usecase: PostUpdatable, repository: PostRepository) {
+        init(usecase: PostUpdatable, repository: PostRepository, userRegistrable: UserRegistrable) {
             self.usecase = usecase
             self.repository = repository
+            self.userRegistrable = userRegistrable
             
-            registerForSubmitableUpdates()
+            registerForUpdates()
         }
         
         func onAppear() {
@@ -43,10 +46,14 @@ extension HomeView {
                 }.store(in: &cancellables)
         }
         
-        private func registerForSubmitableUpdates() {
+        private func registerForUpdates() {
             usecase.didUpdate.sink { [weak self] _ in
                 self?.fetchPosts()
             }.store(in: &cancellables)
+            
+            userRegistrable.didChangeUser
+                .assign(to: \.currentUser, on: self)
+                .store(in: &cancellables)
         }
         
     }

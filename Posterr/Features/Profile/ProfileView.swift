@@ -25,7 +25,7 @@ struct ProfileView: View {
         VStack {
             Spacer()
                 .frame(width: UIScreen.main.bounds.width, height: 50)
-                .background(Color.blue.opacity(0.4))
+                .background(Color.appPrimary)
             Spacer()
         }
         .frame(width: UIScreen.main.bounds.width, height: 100)
@@ -48,7 +48,7 @@ struct ProfileView: View {
                 countPosts.padding(.vertical)
                 ScrollView {
                     ForEach(data.posts, id: \.uuid) { post in
-                        PostView(post: post) {
+                        PostView(post: post, isFromCurrentUser: true) {
                             viewModel.repost(post)
                         }
                     }

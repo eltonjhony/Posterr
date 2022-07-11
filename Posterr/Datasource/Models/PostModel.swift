@@ -23,7 +23,7 @@ public struct PostModel: ModelProtocol {
         source != .repost
     }
     
-    var identifiedUser: UserModel? {
+    var quotePostUser: UserModel? {
         guard case .repost = source else { return user }
         return originalPosts.first?.user ?? user
     }

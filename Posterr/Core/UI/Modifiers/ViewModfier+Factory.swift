@@ -16,7 +16,7 @@ extension StyleModifier {
 }
 
 extension BehaviorModifier {
-    static func touchable(_ action: @escaping ActionCompletion) -> BehaviorModifier<T> where T == Touchable {
-        .init(modifier: T(action: action))
+    static func touchable(disabled: Bool = false, _ action: @escaping ActionCompletion) -> BehaviorModifier<T> where T == Touchable {
+        .init(modifier: T(disabled: disabled, action: action))
     }
 }

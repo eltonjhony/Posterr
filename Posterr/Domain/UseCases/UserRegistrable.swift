@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 public protocol UserRegistrable {
-    var didChangeUser: PassthroughSubject<UserModel, Never> { get }
+    var didChangeUser: CurrentValueSubject<UserModel?, Never> { get }
     
     func register()
     func changeCurrentUser(with user: UserModel)
@@ -19,7 +19,7 @@ final class UserRegistrableUseCase: UserRegistrable, Loggable {
     
     // MARK: - Private(set) members
     
-    private(set) var didChangeUser: PassthroughSubject<UserModel, Never> = .init()
+    private(set) var didChangeUser: CurrentValueSubject<UserModel?, Never> = .init(nil)
     
     // MARK: - Private members
 
@@ -61,8 +61,9 @@ final class UserRegistrableUseCase: UserRegistrable, Loggable {
     }
     
     private func createFakeUsers() {
+        let currentUser = UserModel(uuid: UUID().uuidString, username: "maike143", profilePicture: "user1", createdAt: Date(), isCurrent: true)
         let fakeUsers = [
-            UserModel(uuid: UUID().uuidString, username: "maike143", profilePicture: "user1", createdAt: Date(), isCurrent: true),
+            currentUser,
             UserModel(uuid: UUID().uuidString, username: "nickolas873", profilePicture: "user2", createdAt: Date(), isCurrent: false),
             UserModel(uuid: UUID().uuidString, username: "eljholiveira1", profilePicture: "user3", createdAt: Date(), isCurrent: false),
             UserModel(uuid: UUID().uuidString, username: "newjoiner44", profilePicture: "user4", createdAt: Date(), isCurrent: false),
@@ -74,6 +75,7 @@ final class UserRegistrableUseCase: UserRegistrable, Loggable {
             }
             _ = userRepository.putUser(user)
         }
+        didChangeUser.send(currentUser)
     }
 
 }

@@ -34,9 +34,12 @@ struct NavBarModifier: ViewModifier {
         VStack {
             HStack(spacing: 16) {
                 Text(title)
+                    .font(.title)
+                    .fontWeight(.semibold)
                     .lineLimit(1)
                     .minimumScaleFactor(0.01)
                     .fixedSize(horizontal: false, vertical: true)
+                    
 
                 Spacer()
 
@@ -44,6 +47,8 @@ struct NavBarModifier: ViewModifier {
                     showAddPost.toggle()
                 } label: {
                     Text("Add Post")
+                        .foregroundColor(.appPrimary)
+                        .fontWeight(.semibold)
                 }
 
             }

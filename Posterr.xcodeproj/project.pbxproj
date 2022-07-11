@@ -71,6 +71,7 @@
 		53FEFF69287C3A930016B21C /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF68287C3A930016B21C /* DebugView.swift */; };
 		53FEFF6B287C3C270016B21C /* DebugViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF6A287C3C260016B21C /* DebugViewModel.swift */; };
 		53FEFF72287C533E0016B21C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF71287C533E0016B21C /* String.swift */; };
+		53FEFF74287C67EF0016B21C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF73287C67EF0016B21C /* Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +147,7 @@
 		53FEFF68287C3A930016B21C /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		53FEFF6A287C3C260016B21C /* DebugViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewModel.swift; sourceTree = "<group>"; };
 		53FEFF71287C533E0016B21C /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		53FEFF73287C67EF0016B21C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -416,6 +418,7 @@
 			children = (
 				53FEFF32287A06F80016B21C /* Date.swift */,
 				53FEFF71287C533E0016B21C /* String.swift */,
+				53FEFF73287C67EF0016B21C /* Color.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -630,6 +633,7 @@
 				53FEFF41287A13970016B21C /* DomainRegistration.swift in Sources */,
 				53FEFF21287A04B10016B21C /* ModelProtocol.swift in Sources */,
 				53FEFF3F287A101B0016B21C /* UserRegistrable.swift in Sources */,
+				53FEFF74287C67EF0016B21C /* Color.swift in Sources */,
 				53FEFF47287A17C90016B21C /* PostUpdatable.swift in Sources */,
 				53FEFF33287A06F80016B21C /* Date.swift in Sources */,
 				53FEFF43287A13C70016B21C /* DatasourceRegistration.swift in Sources */,

@@ -21,6 +21,8 @@ struct AddPostView: View {
                         viewModel.submitPost()
                     } label: {
                         Text("Post")
+                            .foregroundColor(.appPrimary)
+                            .fontWeight(.semibold)
                     }
                 }
                 
