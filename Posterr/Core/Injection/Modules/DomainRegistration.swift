@@ -11,7 +11,7 @@ import SwinjectAutoregistration
 final class DomainRegistration: PosterrAssembly {
     func assemble(container: PosterrContainer) {
         container.autoregister(UserRegistrable.self, initializer: UserRegistrableUseCase.init).inObjectScope(.container)
-        container.autoregister(PostSubmitable.self, initializer: PostSubmitableUseCase.init).inObjectScope(.container)
+        container.autoregister(PostUpdatable.self, initializer: PostUpdatableUseCase.init).inObjectScope(.container)
         container.autoregister(ProfileInfoFetchable.self, initializer: ProfileInfoFetchableUseCase.init).inObjectScope(.container)
     }
 }

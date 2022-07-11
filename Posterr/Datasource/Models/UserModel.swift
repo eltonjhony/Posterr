@@ -12,7 +12,7 @@ public struct UserModel: ModelProtocol {
     let username: String
     let profilePicture: String
     let createdAt: Date
-    let isCurrent: Bool
+    var isCurrent: Bool
 }
 
 extension UserModel: MappableProtocol {

@@ -15,6 +15,7 @@ final class ViewModelRegistration: PosterrAssembly {
         }
         container.autoregister(HomeView.ViewModel.self, initializer: HomeView.ViewModel.init)
         container.autoregister(ProfileView.ViewModel.self, initializer: ProfileView.ViewModel.init)
+        container.autoregister(DebugView.ViewModel.self, initializer: DebugView.ViewModel.init)
         
         container.register(TabBarView.ViewModel.self) { resolver in
             let homeTab: HomeTab = .init(view: container~>)

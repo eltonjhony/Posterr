@@ -1,5 +1,5 @@
 //
-//  PostSubmitable.swift
+//  PostUpdatable.swift
 //  Posterr
 //
 //  Created by Elton Jhony on 09.07.22.
@@ -8,19 +8,19 @@
 import Foundation
 import Combine
 
-public protocol PostSubmitable {
-    var didPost: PassthroughSubject<PostModel, Never> { get }
+public protocol PostUpdatable {
+    var didUpdate: PassthroughSubject<Void, Never> { get }
     
     func post(with content: String)
     func repost(post: PostModel)
     func quote(of post: PostModel, with content: String)
 }
 
-final class PostSubmitableUseCase: PostSubmitable, Loggable {
+final class PostUpdatableUseCase: PostUpdatable, Loggable {
     
     // MARK: - Private(set) members
     
-    private(set) var didPost: PassthroughSubject<PostModel, Never> = .init()
+    private(set) var didUpdate: PassthroughSubject<Void, Never> = .init()
     
     // MARK: - Private members
 
@@ -49,7 +49,7 @@ final class PostSubmitableUseCase: PostSubmitable, Loggable {
                     debugPrint(error)
                 }
             } receiveValue: { [weak self] model in
-                self?.didPost.send(model)
+                self?.didUpdate.send()
             }.store(in: &cancellables)
     }
     
@@ -64,7 +64,7 @@ final class PostSubmitableUseCase: PostSubmitable, Loggable {
                     debugPrint(error)
                 }
             } receiveValue: { [weak self] model in
-                self?.didPost.send(model)
+                self?.didUpdate.send()
             }.store(in: &cancellables)
     }
     
@@ -79,7 +79,7 @@ final class PostSubmitableUseCase: PostSubmitable, Loggable {
                     debugPrint(error)
                 }
             } receiveValue: { [weak self] model in
-                self?.didPost.send(model)
+                self?.didUpdate.send()
             }.store(in: &cancellables)
     }
     

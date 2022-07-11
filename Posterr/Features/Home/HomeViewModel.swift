@@ -15,11 +15,11 @@ extension HomeView {
         @Published var posts: [PostModel] = []
         
         private let repository: PostRepository
-        private let usecase: PostSubmitable
+        private let usecase: PostUpdatable
         
         private var cancellables = [AnyCancellable]()
         
-        init(usecase: PostSubmitable, repository: PostRepository) {
+        init(usecase: PostUpdatable, repository: PostRepository) {
             self.usecase = usecase
             self.repository = repository
             
@@ -44,7 +44,7 @@ extension HomeView {
         }
         
         private func registerForSubmitableUpdates() {
-            usecase.didPost.sink { [weak self] _ in
+            usecase.didUpdate.sink { [weak self] _ in
                 self?.fetchPosts()
             }.store(in: &cancellables)
         }

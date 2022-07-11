@@ -15,12 +15,12 @@ extension ProfileView {
         @Published var data: ProfileInfoModel?
         
         private let repository: PostRepository
-        private let usecase: PostSubmitable
+        private let usecase: PostUpdatable
         private let fetchable: ProfileInfoFetchable
         
         private var cancellables = [AnyCancellable]()
         
-        init(usecase: PostSubmitable, repository: PostRepository, fetchable: ProfileInfoFetchable) {
+        init(usecase: PostUpdatable, repository: PostRepository, fetchable: ProfileInfoFetchable) {
             self.usecase = usecase
             self.repository = repository
             self.fetchable = fetchable
@@ -36,7 +36,7 @@ extension ProfileView {
         }
         
         private func registerForUpdates() {
-            usecase.didPost.sink { [weak self] _ in
+            usecase.didUpdate.sink { [weak self] _ in
                 self?.fetchable.fetchProfileData()
             }.store(in: &cancellables)
             

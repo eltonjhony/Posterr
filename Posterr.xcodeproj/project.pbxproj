@@ -60,7 +60,7 @@
 		53FEFF41287A13970016B21C /* DomainRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF40287A13970016B21C /* DomainRegistration.swift */; };
 		53FEFF43287A13C70016B21C /* DatasourceRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF42287A13C70016B21C /* DatasourceRegistration.swift */; };
 		53FEFF45287A14770016B21C /* CoreRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF44287A14770016B21C /* CoreRegistration.swift */; };
-		53FEFF47287A17C90016B21C /* PostSubmitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF46287A17C90016B21C /* PostSubmitable.swift */; };
+		53FEFF47287A17C90016B21C /* PostUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF46287A17C90016B21C /* PostUpdatable.swift */; };
 		53FEFF4A287A19C30016B21C /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF49287A19C30016B21C /* PostRepository.swift */; };
 		53FEFF4C287A1CAA0016B21C /* PostProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF4B287A1CAA0016B21C /* PostProvider.swift */; };
 		53FEFF4E287A1CC40016B21C /* PostRealmProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF4D287A1CC40016B21C /* PostRealmProvider.swift */; };
@@ -68,6 +68,8 @@
 		53FEFF52287A1FF50016B21C /* DefaultPostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF51287A1FF50016B21C /* DefaultPostRepository.swift */; };
 		53FEFF63287B5D0C0016B21C /* ProfileInfoFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF62287B5D0C0016B21C /* ProfileInfoFetchable.swift */; };
 		53FEFF66287B662F0016B21C /* ProfileInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF65287B662F0016B21C /* ProfileInfoModel.swift */; };
+		53FEFF69287C3A930016B21C /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF68287C3A930016B21C /* DebugView.swift */; };
+		53FEFF6B287C3C270016B21C /* DebugViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF6A287C3C260016B21C /* DebugViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,7 +134,7 @@
 		53FEFF40287A13970016B21C /* DomainRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainRegistration.swift; sourceTree = "<group>"; };
 		53FEFF42287A13C70016B21C /* DatasourceRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasourceRegistration.swift; sourceTree = "<group>"; };
 		53FEFF44287A14770016B21C /* CoreRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreRegistration.swift; sourceTree = "<group>"; };
-		53FEFF46287A17C90016B21C /* PostSubmitable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSubmitable.swift; sourceTree = "<group>"; };
+		53FEFF46287A17C90016B21C /* PostUpdatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUpdatable.swift; sourceTree = "<group>"; };
 		53FEFF49287A19C30016B21C /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
 		53FEFF4B287A1CAA0016B21C /* PostProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostProvider.swift; sourceTree = "<group>"; };
 		53FEFF4D287A1CC40016B21C /* PostRealmProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRealmProvider.swift; sourceTree = "<group>"; };
@@ -140,6 +142,8 @@
 		53FEFF51287A1FF50016B21C /* DefaultPostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPostRepository.swift; sourceTree = "<group>"; };
 		53FEFF62287B5D0C0016B21C /* ProfileInfoFetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoFetchable.swift; sourceTree = "<group>"; };
 		53FEFF65287B662F0016B21C /* ProfileInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoModel.swift; sourceTree = "<group>"; };
+		53FEFF68287C3A930016B21C /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
+		53FEFF6A287C3C260016B21C /* DebugViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +224,7 @@
 				53FEFEE22879DA2F0016B21C /* AddPost */,
 				53FEFF56287A347A0016B21C /* Feed */,
 				53FEFED62879D3FA0016B21C /* TabBar */,
+				53FEFF67287C3A870016B21C /* Debug */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -443,7 +448,7 @@
 			isa = PBXGroup;
 			children = (
 				53FEFF3E287A101B0016B21C /* UserRegistrable.swift */,
-				53FEFF46287A17C90016B21C /* PostSubmitable.swift */,
+				53FEFF46287A17C90016B21C /* PostUpdatable.swift */,
 				53FEFF62287B5D0C0016B21C /* ProfileInfoFetchable.swift */,
 			);
 			path = UseCases;
@@ -483,6 +488,15 @@
 				53FEFF65287B662F0016B21C /* ProfileInfoModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		53FEFF67287C3A870016B21C /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				53FEFF68287C3A930016B21C /* DebugView.swift */,
+				53FEFF6A287C3C260016B21C /* DebugViewModel.swift */,
+			);
+			path = Debug;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -612,11 +626,12 @@
 				53FEFF41287A13970016B21C /* DomainRegistration.swift in Sources */,
 				53FEFF21287A04B10016B21C /* ModelProtocol.swift in Sources */,
 				53FEFF3F287A101B0016B21C /* UserRegistrable.swift in Sources */,
-				53FEFF47287A17C90016B21C /* PostSubmitable.swift in Sources */,
+				53FEFF47287A17C90016B21C /* PostUpdatable.swift in Sources */,
 				53FEFF33287A06F80016B21C /* Date.swift in Sources */,
 				53FEFF43287A13C70016B21C /* DatasourceRegistration.swift in Sources */,
 				53FEFF132879FC960016B21C /* RealmProvider.swift in Sources */,
 				53FEFEDD2879D7660016B21C /* NavBarModifier.swift in Sources */,
+				53FEFF69287C3A930016B21C /* DebugView.swift in Sources */,
 				53FEFF3B287A0F5B0016B21C /* DefaultUserRepository.swift in Sources */,
 				53FEFEBD2879B6530016B21C /* UserModel.swift in Sources */,
 				53FEFEE12879D86D0016B21C /* ViewModfier+Factory.swift in Sources */,
@@ -637,6 +652,7 @@
 				53FEFF39287A0E410016B21C /* UserRepository.swift in Sources */,
 				53FEFF4A287A19C30016B21C /* PostRepository.swift in Sources */,
 				53FEFEF82879E75F0016B21C /* PosterrAssembly.swift in Sources */,
+				53FEFF6B287C3C270016B21C /* DebugViewModel.swift in Sources */,
 				53FEFF2A287A065E0016B21C /* UserRealmProvider.swift in Sources */,
 				53FEFF52287A1FF50016B21C /* DefaultPostRepository.swift in Sources */,
 				53FEFEFE2879E7C20016B21C /* Resolver+Extension.swift in Sources */,

@@ -17,7 +17,7 @@ extension AddPostView {
         
         private let type: AddPostView.SubmissionType
         private let userRepository: UserRepository
-        private let usecase: PostSubmitable
+        private let usecase: PostUpdatable
         
         private var cancellables = [AnyCancellable]()
         
@@ -34,7 +34,7 @@ extension AddPostView {
             type == .post ? "What's happening" : "Add a comment"
         }
         
-        init(type: AddPostView.SubmissionType, userRepository: UserRepository, usecase: PostSubmitable) {
+        init(type: AddPostView.SubmissionType, userRepository: UserRepository, usecase: PostUpdatable) {
             self.type = type
             self.userRepository = userRepository
             self.usecase = usecase
@@ -67,7 +67,7 @@ extension AddPostView {
         }
         
         private func registerForSubmitableUpdates() {
-            usecase.didPost.sink { [weak self] _ in
+            usecase.didUpdate.sink { [weak self] _ in
                 self?.dismiss.toggle()
             }.store(in: &cancellables)
         }

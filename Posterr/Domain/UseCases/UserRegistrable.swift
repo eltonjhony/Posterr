@@ -9,21 +9,30 @@ import Foundation
 import Combine
 
 public protocol UserRegistrable {
+    var didChangeUser: PassthroughSubject<UserModel, Never> { get }
+    
     func register()
+    func changeCurrentUser(with user: UserModel)
 }
 
 final class UserRegistrableUseCase: UserRegistrable, Loggable {
     
+    // MARK: - Private(set) members
+    
+    private(set) var didChangeUser: PassthroughSubject<UserModel, Never> = .init()
+    
     // MARK: - Private members
 
     private let userRepository: UserRepository
+    private let postUpdatable: PostUpdatable
     
     private var cancellables = [AnyCancellable]()
 
     // MARK: - Initialization
 
-    init(userRepository: UserRepository) {
+    init(userRepository: UserRepository, postUpdatable: PostUpdatable) {
         self.userRepository = userRepository
+        self.postUpdatable = postUpdatable
     }
 
     // MARK: - Action Methods
@@ -34,6 +43,20 @@ final class UserRegistrableUseCase: UserRegistrable, Loggable {
                 if users.isEmpty {
                     self?.createFakeUsers()
                 }
+            }.store(in: &cancellables)
+    }
+    
+    func changeCurrentUser(with user: UserModel) {
+        userRepository.getCurrentUser()
+            .flatMap { currentUser in
+                return self.userRepository.putUser(currentUser.changing { $0.isCurrent = false })
+            }
+            .flatMap { _ in
+                return self.userRepository.putUser(user.changing { $0.isCurrent = true })
+            }
+            .sink { _ in } receiveValue: { [weak self] currentUser in
+                self?.didChangeUser.send(currentUser)
+                self?.postUpdatable.didUpdate.send()
             }.store(in: &cancellables)
     }
     
@@ -50,4 +73,12 @@ final class UserRegistrableUseCase: UserRegistrable, Loggable {
         }
     }
 
+}
+
+private extension UserModel {
+    func changing(change: (inout UserModel) -> Void) -> UserModel {
+        var user = self
+        change(&user)
+        return user
+    }
 }
