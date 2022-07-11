@@ -70,6 +70,7 @@
 		53FEFF66287B662F0016B21C /* ProfileInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF65287B662F0016B21C /* ProfileInfoModel.swift */; };
 		53FEFF69287C3A930016B21C /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF68287C3A930016B21C /* DebugView.swift */; };
 		53FEFF6B287C3C270016B21C /* DebugViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF6A287C3C260016B21C /* DebugViewModel.swift */; };
+		53FEFF72287C533E0016B21C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF71287C533E0016B21C /* String.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +145,7 @@
 		53FEFF65287B662F0016B21C /* ProfileInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoModel.swift; sourceTree = "<group>"; };
 		53FEFF68287C3A930016B21C /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		53FEFF6A287C3C260016B21C /* DebugViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewModel.swift; sourceTree = "<group>"; };
+		53FEFF71287C533E0016B21C /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -413,6 +415,7 @@
 			isa = PBXGroup;
 			children = (
 				53FEFF32287A06F80016B21C /* Date.swift */,
+				53FEFF71287C533E0016B21C /* String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -610,6 +613,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53FEFF72287C533E0016B21C /* String.swift in Sources */,
 				53FEFF2D287A06A80016B21C /* Loggable.swift in Sources */,
 				53FEFE952879AFCF0016B21C /* HomeView.swift in Sources */,
 				53FEFF192879FD280016B21C /* RealmDBManager.swift in Sources */,

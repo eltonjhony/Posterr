@@ -22,6 +22,11 @@ public struct PostModel: ModelProtocol {
     var isRepostable: Bool {
         source != .repost
     }
+    
+    var identifiedUser: UserModel? {
+        guard case .repost = source else { return user }
+        return originalPosts.first?.user ?? user
+    }
 }
 
 extension PostModel: MappableProtocol {

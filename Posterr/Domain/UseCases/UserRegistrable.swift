@@ -62,13 +62,16 @@ final class UserRegistrableUseCase: UserRegistrable, Loggable {
     
     private func createFakeUsers() {
         let fakeUsers = [
-            UserModel(uuid: UUID().uuidString, username: "@maike143", profilePicture: "user1", createdAt: Date(), isCurrent: true),
-            UserModel(uuid: UUID().uuidString, username: "@nickolas873", profilePicture: "user2", createdAt: Date(), isCurrent: false),
-            UserModel(uuid: UUID().uuidString, username: "@eljholiveira123", profilePicture: "user3", createdAt: Date(), isCurrent: false),
-            UserModel(uuid: UUID().uuidString, username: "@newjoiner44", profilePicture: "user4", createdAt: Date(), isCurrent: false),
-            UserModel(uuid: UUID().uuidString, username: "@kbob675", profilePicture: "user5", createdAt: Date(), isCurrent: false)
+            UserModel(uuid: UUID().uuidString, username: "maike143", profilePicture: "user1", createdAt: Date(), isCurrent: true),
+            UserModel(uuid: UUID().uuidString, username: "nickolas873", profilePicture: "user2", createdAt: Date(), isCurrent: false),
+            UserModel(uuid: UUID().uuidString, username: "eljholiveira1", profilePicture: "user3", createdAt: Date(), isCurrent: false),
+            UserModel(uuid: UUID().uuidString, username: "newjoiner44", profilePicture: "user4", createdAt: Date(), isCurrent: false),
+            UserModel(uuid: UUID().uuidString, username: "kbob675", profilePicture: "user5", createdAt: Date(), isCurrent: false)
         ]
         fakeUsers.forEach { user in
+            guard user.username.isAlphanumeric, user.username.count <= 14 else {
+                preconditionFailure("username must have maximum of 14 alphanumeric characters")
+            }
             _ = userRepository.putUser(user)
         }
     }

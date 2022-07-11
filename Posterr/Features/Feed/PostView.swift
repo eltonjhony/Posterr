@@ -79,8 +79,8 @@ struct PostView: View {
             VStack(alignment: .leading, spacing: 4) {
                 if let parentPost = post.originalPosts.first {
                     HStack(alignment: .top, spacing: 2) {
-                        ProfilePicture(picture: parentPost.user?.profilePicture ?? "", size: 20)
-                        ProfileIdentification(username: parentPost.user?.username ?? "")
+                        ProfilePicture(picture: parentPost.identifiedUser?.profilePicture ?? "", size: 20)
+                        ProfileIdentification(username: parentPost.identifiedUser?.username ?? "")
                         Spacer()
                     }
                     Text(parentPost.content)

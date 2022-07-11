@@ -43,7 +43,7 @@ struct ProfileView: View {
     private var content: some View {
         if let data = viewModel.data {
             VStack {
-                Text(data.currentUser.username)
+                ProfileIdentification(username: data.currentUser.username)
                 Text("Joined \(data.joinerDate)")
                 countPosts.padding(.vertical)
                 ScrollView {
