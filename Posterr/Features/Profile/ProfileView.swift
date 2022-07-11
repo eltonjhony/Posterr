@@ -72,21 +72,21 @@ struct ProfileView: View {
         HStack(spacing: 16) {
             if let data = viewModel.data {
                 HStack(spacing: 2) {
+                    Text("posts:")
                     Text("\(data.postsCount)")
                         .fontWeight(.semibold)
-                    Text("post")
                 }
                 
                 HStack(spacing: 2) {
+                    Text("reposts:")
                     Text("\(data.repostCount)")
                         .fontWeight(.semibold)
-                    Text("repost")
                 }
                 
                 HStack(spacing: 2) {
+                    Text("quote-posts:")
                     Text("\(data.quoteCount)")
                         .fontWeight(.semibold)
-                    Text("quote-posts")
                 }
             }
         }
