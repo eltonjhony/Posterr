@@ -36,10 +36,6 @@ extension HomeView {
             fetchPosts()
         }
         
-        func repost(_ post: PostModel) {
-            usecase.repost(post: post)
-        }
-        
         private func fetchPosts() {
             repository.getAllPosts()
                 .sink { [weak self] in

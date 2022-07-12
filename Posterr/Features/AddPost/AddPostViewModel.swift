@@ -19,31 +19,22 @@ extension AddPostView {
         @Published var content: String = ""
         @Published var dismiss: Bool = false
         
-        private let type: AddPostView.SubmissionType
+        let originalPost: PostModel?
         private let userRepository: UserRepository
         private let usecase: PostUpdatable
         
         private var cancellables = [AnyCancellable]()
-        
-        var originalPost: PostModel? {
-            switch type {
-            case let .quote(post), let .repost(post):
-                return post
-            default:
-                return nil
-            }
-        }
         
         var characterLimit: Int {
             PostLimit.content.rawValue
         }
         
         var placeholderText: String {
-            type == .post ? "What's happening" : "Add a comment"
+            originalPost == nil ? "What's happening" : "Add a comment"
         }
         
-        init(type: AddPostView.SubmissionType, userRepository: UserRepository, usecase: PostUpdatable) {
-            self.type = type
+        init(originalPost: PostModel?, userRepository: UserRepository, usecase: PostUpdatable) {
+            self.originalPost = originalPost
             self.userRepository = userRepository
             self.usecase = usecase
             
@@ -55,14 +46,11 @@ extension AddPostView {
         }
         
         func submitPost() {
-            switch type {
-            case .post:
+            guard let originalPost = originalPost else {
                 usecase.post(with: content)
-            case let .repost(post):
-                usecase.repost(post: post)
-            case let .quote(post):
-                usecase.quote(of: post, with: content)
+                return
             }
+            usecase.quote(of: originalPost, with: content)
         }
         
         private func fetchCurrentUser() {

@@ -21,9 +21,7 @@ struct HomeView: View {
     
     @ViewBuilder
     private var content: some View {
-        FeedView(posts: viewModel.posts) { post in
-            viewModel.repost(post)
-        }
+        FeedView(posts: viewModel.posts, currentUser: viewModel.currentUser)
     }
     
 }

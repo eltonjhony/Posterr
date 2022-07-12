@@ -10,7 +10,7 @@ import SwiftUI
 
 struct FeedView: View {
     let posts: [PostModel]
-    let onRepost: (PostModel) -> Void
+    let currentUser: UserModel?
 
     @ViewBuilder
     var body: some View {
@@ -24,9 +24,7 @@ struct FeedView: View {
     private var timeline: some View {
         ScrollView {
             ForEach(posts, id: \.uuid) { post in
-                PostView(post: post) {
-                    onRepost(post)
-                }
+                PostView(item: .init(post: post, currentUser: currentUser))
             }
         }
     }

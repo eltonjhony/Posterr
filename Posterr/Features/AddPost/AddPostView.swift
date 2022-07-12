@@ -60,7 +60,7 @@ struct AddPostView: View {
             if let originalPost = viewModel.originalPost {
                 HStack {
                     Spacer()
-                    PostView(post: originalPost, isFromFeed: false)
+                    PostView(item: .init(post: originalPost, isFromFeed: false))
                 }
             }
             
@@ -68,9 +68,4 @@ struct AddPostView: View {
         }
     }
     
-    enum SubmissionType: Equatable {
-        case post
-        case repost(PostModel)
-        case quote(PostModel)
-    }
 }

@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct PostView: View {
-    let post: PostModel
+    @ObservedObject var viewModel: ViewModel
     
-    var isFromFeed: Bool = true
-    
-    var onRepost: ActionCompletion? = nil
-    @State var startQuoting: Bool = false
+    init(item: PostItem) {
+        viewModel = PosterrAssembler.resolve(
+            PostView.ViewModel.self,
+            argument: item
+        )
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            switch post.source {
+            switch viewModel.post.source {
             case .post, .quote:
                 content
             case .repost:
@@ -25,11 +27,11 @@ struct PostView: View {
             }
             separatorLine
         }
-        .sheet(isPresented: $startQuoting) {
+        .sheet(isPresented: $viewModel.startQuoting) {
             AddPostView(
                 viewModel: PosterrAssembler.resolve(
                     AddPostView.ViewModel.self,
-                    argument: AddPostView.SubmissionType.quote(post)
+                    argument: viewModel.post
                 )
             )
         }
@@ -37,14 +39,14 @@ struct PostView: View {
     
     private var content: some View {
         VStack(alignment: .leading) {
-            if let user = post.user {
+            if let user = viewModel.post.user {
                 HStack(alignment: .top) {
                     ProfilePicture(picture: user.profilePicture)
                     VStack(alignment: .leading) {
                         ProfileIdentification(username: user.username)
-                        if case .post = post.source {
-                            Text(post.content)
-                        } else if case .quote = post.source {
+                        if case .post = viewModel.post.source {
+                            Text(viewModel.post.content)
+                        } else if case .quote = viewModel.post.source {
                             quoteContent
                         }
                         actions
@@ -57,7 +59,7 @@ struct PostView: View {
     
     private var repostContent: some View {
         VStack(alignment: .leading, spacing: .zero) {
-            if let user = post.user {
+            if let user = viewModel.post.user {
                 HStack(spacing: 2) {
                     Image(systemName: "repeat")
                     Text("Repost from \(user.username)")
@@ -67,8 +69,8 @@ struct PostView: View {
                 .font(.footnote)
                 .foregroundColor(.contentInverted)
                 .padding(.horizontal)
-                if let originalPost = post.originalPosts.first {
-                    PostView(post: originalPost, isFromFeed: false)
+                if let originalPost = viewModel.post.originalPosts.first {
+                    PostView(item: .init(post: originalPost, isFromFeed: false))
                 }
             }
             actions
@@ -78,12 +80,12 @@ struct PostView: View {
     
     private var quoteContent: some View {
         VStack(alignment: .leading) {
-            Text(post.content)
+            Text(viewModel.post.content)
             VStack(alignment: .leading, spacing: 4) {
-                if let parentPost = post.originalPosts.first {
+                if let parentPost = viewModel.originalPost {
                     HStack(alignment: .top, spacing: 2) {
-                        ProfilePicture(picture: parentPost.quotePostUser?.profilePicture ?? "", size: 20)
-                        ProfileIdentification(username: parentPost.quotePostUser?.username ?? "")
+                        ProfilePicture(picture: viewModel.quotePostingUser?.profilePicture ?? "", size: 20)
+                        ProfileIdentification(username: viewModel.quotePostingUser?.username ?? "")
                         Spacer()
                     }
                     Text(parentPost.content)
@@ -104,16 +106,14 @@ struct PostView: View {
     
     @ViewBuilder
     private var actions: some View {
-        if isFromFeed {
+        if viewModel.item.isFromFeed {
             HStack(spacing: 24) {
-                if let onRepost = onRepost {
-                    Image(systemName: post.isRepostable ? "signpost.left" : "signpost.left.fill")
-                        .behaviour(.touchable(disabled: !post.isRepostable, onRepost))
-                        .foregroundColor(.appAccent)
-                }
+                Image(systemName: viewModel.isRepostable ? "signpost.left" : "signpost.left.fill")
+                    .behaviour(.touchable(disabled: !viewModel.isRepostable, viewModel.repost))
+                    .foregroundColor(.appAccent)
                 Image(systemName: "quote.bubble")
                     .behaviour(.touchable() {
-                        startQuoting.toggle()
+                        viewModel.quoteReposting()
                     }).foregroundColor(.appAccent)
                 Spacer()
             }
@@ -123,7 +123,7 @@ struct PostView: View {
     
     @ViewBuilder
     private var separatorLine: some View {
-        if isFromFeed {
+        if viewModel.item.isFromFeed {
             Rectangle()
                 .frame(width: UIScreen.main.bounds.width, height: 1)
                 .foregroundColor(Color.appSeparator)
@@ -131,4 +131,16 @@ struct PostView: View {
         }
     }
     
+}
+
+struct PostItem {
+    let post: PostModel
+    let currentUser: UserModel?
+    let isFromFeed: Bool
+    
+    init(post: PostModel, currentUser: UserModel? = nil, isFromFeed: Bool = true) {
+        self.post = post
+        self.currentUser = currentUser
+        self.isFromFeed = isFromFeed
+    }
 }

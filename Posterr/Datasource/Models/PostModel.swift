@@ -18,15 +18,6 @@ public struct PostModel: ModelProtocol {
     let user: UserModel?
     let source: SourceType
     let originalPosts: [PostModel]
-    
-    var isRepostable: Bool {
-        source != .repost
-    }
-    
-    var quotePostUser: UserModel? {
-        guard case .repost = source else { return user }
-        return originalPosts.first?.user ?? user
-    }
 }
 
 extension PostModel: MappableProtocol {

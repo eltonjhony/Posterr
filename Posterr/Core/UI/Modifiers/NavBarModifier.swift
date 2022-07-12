@@ -21,8 +21,7 @@ struct NavBarModifier: ViewModifier {
                 .sheet(isPresented: $showAddPost) {
                     AddPostView(
                         viewModel: PosterrAssembler.resolve(
-                            AddPostView.ViewModel.self,
-                            argument: AddPostView.SubmissionType.post
+                            AddPostView.ViewModel.self
                         )
                     )
                 }

@@ -48,9 +48,8 @@ struct ProfileView: View {
                 ProfileIdentification(username: data.currentUser.username)
                 Text("Joined \(data.joinerDate)")
                 countPosts.padding(.vertical)
-                FeedView(posts: data.posts) { post in
-                    viewModel.repost(post)
-                }.padding(.vertical)
+                FeedView(posts: data.posts, currentUser: data.currentUser)
+                    .padding(.vertical)
                 Spacer()
             }
         }

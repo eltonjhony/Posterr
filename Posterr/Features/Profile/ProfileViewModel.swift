@@ -34,10 +34,6 @@ extension ProfileView {
             fetchable.fetchProfileData()
         }
         
-        func repost(_ post: PostModel) {
-            usecase.repost(post: post)
-        }
-        
         private func registerForUpdates() {
             usecase.didUpdate.sink { [weak self] _ in
                 self?.fetchable.fetchProfileData()
