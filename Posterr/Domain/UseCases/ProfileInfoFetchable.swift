@@ -10,6 +10,7 @@ import Combine
 
 public protocol ProfileInfoFetchable {
     var data: CurrentValueSubject<ProfileInfoModel?, Never> { get }
+    var didError: PassthroughSubject<Error, Never> { get }
     
     func fetchProfileData()
 }
@@ -19,6 +20,7 @@ final class ProfileInfoFetchableUseCase: ProfileInfoFetchable, Loggable {
     // MARK: - Private(set) members
     
     private(set) var data: CurrentValueSubject<ProfileInfoModel?, Never> = .init(nil)
+    private(set) var didError: PassthroughSubject<Error, Never> = .init()
     
     // MARK: - Private members
 
@@ -38,19 +40,16 @@ final class ProfileInfoFetchableUseCase: ProfileInfoFetchable, Loggable {
     
     func fetchProfileData() {
         userRepository.getCurrentUser()
-            .sink { _ in
-                //TODO: Handle errors
-            } receiveValue: { [weak self] user in
-                self?.fetchMyPosts(with: user)
+            .flatMap { user in
+                self.postRepository.getPosts(by: user.uuid)
+                    .map { posts in (user, posts) }
+                    .eraseToAnyPublisher()
             }
-            .store(in: &cancellables)
-    }
-    
-    private func fetchMyPosts(with user: UserModel) {
-        postRepository.getPosts(by: user.uuid)
-            .sink { _ in
-                //TODO: Handle errors
-            } receiveValue: { [weak self] posts in
+            .sink { [weak self] in
+                if case let .failure(error) = $0 {
+                    self?.didError.send(error)
+                }
+            } receiveValue: { [weak self] (user, posts) in
                 self?.data.send(.init(currentUser: user, posts: posts))
             }
             .store(in: &cancellables)

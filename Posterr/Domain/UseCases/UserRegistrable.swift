@@ -49,10 +49,10 @@ final class UserRegistrableUseCase: UserRegistrable, Loggable {
     func changeCurrentUser(with user: UserModel) {
         userRepository.getCurrentUser()
             .flatMap { currentUser in
-                return self.userRepository.putUser(currentUser.changing { $0.isCurrent = false })
+                self.userRepository.putUser(currentUser.changing { $0.isCurrent = false })
             }
             .flatMap { _ in
-                return self.userRepository.putUser(user.changing { $0.isCurrent = true })
+                self.userRepository.putUser(user.changing { $0.isCurrent = true })
             }
             .sink { _ in } receiveValue: { [weak self] currentUser in
                 self?.didChangeUser.send(currentUser)

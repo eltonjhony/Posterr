@@ -13,6 +13,17 @@ struct AddPostView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
+        NotificationView(data: viewModel.alert, isShown: $viewModel.isAlertShown) {
+            content
+                .padding()
+                .onAppear(perform: viewModel.onAppear)
+                .onChange(of: viewModel.dismiss) { newValue in
+                    presentationMode.wrappedValue.dismiss()
+                }
+        }
+    }
+    
+    private var content: some View {
         VStack {
             VStack {
                 HStack {
@@ -24,6 +35,7 @@ struct AddPostView: View {
                             .foregroundColor(.appPrimary)
                             .fontWeight(.semibold)
                     }
+                    .disabled(viewModel.content.isEmpty)
                 }
                 
                 HStack(alignment: .top) {
@@ -53,11 +65,6 @@ struct AddPostView: View {
             }
             
             Spacer()
-        }
-        .padding()
-        .onAppear(perform: viewModel.onAppear)
-        .onChange(of: viewModel.dismiss) { newValue in
-            presentationMode.wrappedValue.dismiss()
         }
     }
     

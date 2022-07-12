@@ -10,7 +10,10 @@ import Combine
 
 extension HomeView {
     
-    class ViewModel: ObservableObject {
+    class ViewModel: ObservableObject, Alertable {
+        
+        @Published var alert: NotificationDataModel = ToastDataModel.unknown
+        @Published var isAlertShown: Bool = false
         
         @Published var posts: [PostModel] = []
         @Published var currentUser: UserModel?
@@ -39,8 +42,10 @@ extension HomeView {
         
         private func fetchPosts() {
             repository.getAllPosts()
-                .sink { _ in
-                    //TODO: Handle errors
+                .sink { [weak self] in
+                    if case let .failure(error) = $0 {
+                        self?.toastError(error)
+                    }
                 } receiveValue: { [weak self] posts in
                     self?.posts = posts
                 }.store(in: &cancellables)

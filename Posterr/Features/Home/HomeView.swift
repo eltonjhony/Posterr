@@ -11,10 +11,12 @@ struct HomeView: View {
     @ObservedObject var viewModel: ViewModel
     
     var body: some View {
-        content
-            .style(.navBar(title: "Feed"))
-            .edgesIgnoringSafeArea(.bottom)
-            .onAppear(perform: viewModel.onAppear)
+        NotificationView(data: viewModel.alert, isShown: $viewModel.isAlertShown) {
+            content
+                .style(.navBar(title: "Feed"))
+                .edgesIgnoringSafeArea(.bottom)
+                .onAppear(perform: viewModel.onAppear)
+        }
     }
     
     @ViewBuilder

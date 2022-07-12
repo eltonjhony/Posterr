@@ -33,7 +33,6 @@ extension DebugView {
                     self?.users = users
                 }
                 .store(in: &cancellables)
-
         }
         
         func select(new user: UserModel) {

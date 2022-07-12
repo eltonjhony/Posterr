@@ -12,13 +12,15 @@ struct ProfileView: View {
     @ObservedObject var viewModel: ViewModel
     
     var body: some View {
-        VStack {
-            profileThumbnail
-            content
+        NotificationView(data: viewModel.alert, isShown: $viewModel.isAlertShown) {
+            VStack {
+                profileThumbnail
+                content
+            }
+            .style(.navBar(title: "Profile"))
+            .edgesIgnoringSafeArea(.all)
+            .onAppear(perform: viewModel.onAppear)
         }
-        .style(.navBar(title: "Profile"))
-        .edgesIgnoringSafeArea(.all)
-        .onAppear(perform: viewModel.onAppear)
     }
     
     private var profileThumbnail: some View {

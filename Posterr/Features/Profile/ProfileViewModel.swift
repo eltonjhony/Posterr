@@ -10,7 +10,10 @@ import Combine
 
 extension ProfileView {
     
-    class ViewModel: ObservableObject {
+    class ViewModel: ObservableObject, Alertable {
+        
+        @Published var alert: NotificationDataModel = ToastDataModel.unknown
+        @Published var isAlertShown: Bool = false
         
         @Published var data: ProfileInfoModel?
         
@@ -38,6 +41,10 @@ extension ProfileView {
         private func registerForUpdates() {
             usecase.didUpdate.sink { [weak self] _ in
                 self?.fetchable.fetchProfileData()
+            }.store(in: &cancellables)
+            
+            fetchable.didError.sink { [weak self] error in
+                self?.toastError(error)
             }.store(in: &cancellables)
             
             fetchable.data

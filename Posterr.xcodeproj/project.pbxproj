@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		530B32B7287D6E3F00B78309 /* CharacterCountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B32B6287D6E3F00B78309 /* CharacterCountdownView.swift */; };
+		530B32B9287DA14700B78309 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B32B8287DA14700B78309 /* NotificationView.swift */; };
+		530B32BC287DA23700B78309 /* NotificationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B32BB287DA23700B78309 /* NotificationDataModel.swift */; };
+		530B32BE287DA2DC00B78309 /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B32BD287DA2DC00B78309 /* Alertable.swift */; };
+		530B32C0287DA8D100B78309 /* ActionIconModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B32BF287DA8D100B78309 /* ActionIconModifier.swift */; };
 		53FEFE932879AFCF0016B21C /* PosterrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFE922879AFCF0016B21C /* PosterrApp.swift */; };
 		53FEFE952879AFCF0016B21C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFE942879AFCF0016B21C /* HomeView.swift */; };
 		53FEFE972879AFD10016B21C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53FEFE962879AFD10016B21C /* Assets.xcassets */; };
@@ -89,6 +93,10 @@
 
 /* Begin PBXFileReference section */
 		530B32B6287D6E3F00B78309 /* CharacterCountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCountdownView.swift; sourceTree = "<group>"; };
+		530B32B8287DA14700B78309 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		530B32BB287DA23700B78309 /* NotificationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataModel.swift; sourceTree = "<group>"; };
+		530B32BD287DA2DC00B78309 /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
+		530B32BF287DA8D100B78309 /* ActionIconModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionIconModifier.swift; sourceTree = "<group>"; };
 		53FEFE8F2879AFCF0016B21C /* Posterr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Posterr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53FEFE922879AFCF0016B21C /* PosterrApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterrApp.swift; sourceTree = "<group>"; };
 		53FEFE942879AFCF0016B21C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -178,6 +186,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		530B32BA287DA22400B78309 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				530B32B8287DA14700B78309 /* NotificationView.swift */,
+				530B32BB287DA23700B78309 /* NotificationDataModel.swift */,
+				530B32BD287DA2DC00B78309 /* Alertable.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 		53FEFE862879AFCF0016B21C = {
 			isa = PBXGroup;
 			children = (
@@ -282,6 +300,7 @@
 				53FEFF1A287A00D40016B21C /* Touchable.swift */,
 				53FEFEDE2879D82F0016B21C /* ViewModifier.swift */,
 				53FEFEE02879D86D0016B21C /* ViewModfier+Factory.swift */,
+				530B32BF287DA8D100B78309 /* ActionIconModifier.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -478,6 +497,7 @@
 		53FEFF55287A338C0016B21C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				530B32BA287DA22400B78309 /* Notifications */,
 				53FEFECF2879D16D0016B21C /* BottomNavigationView.swift */,
 				53FEFEC62879C8D70016B21C /* ProfilePicture.swift */,
 				53FEFEC82879C94A0016B21C /* ProfileIdentification.swift */,
@@ -632,6 +652,7 @@
 				53FEFEDA2879D4250016B21C /* ProfileView.swift in Sources */,
 				53FEFF50287A1D1F0016B21C /* PostEntity.swift in Sources */,
 				53FEFEC92879C94A0016B21C /* ProfileIdentification.swift in Sources */,
+				530B32B9287DA14700B78309 /* NotificationView.swift in Sources */,
 				530B32B7287D6E3F00B78309 /* CharacterCountdownView.swift in Sources */,
 				53FEFF052879E9170016B21C /* HomeViewModel.swift in Sources */,
 				53FEFECC2879D1150016B21C /* TabBarView.swift in Sources */,
@@ -664,6 +685,7 @@
 				53FEFEC72879C8D70016B21C /* ProfilePicture.swift in Sources */,
 				53FEFF032879E8D20016B21C /* ViewModelRegistration.swift in Sources */,
 				53FEFEFB2879E7840016B21C /* Container+Extension.swift in Sources */,
+				530B32C0287DA8D100B78309 /* ActionIconModifier.swift in Sources */,
 				53FEFED32879D24D0016B21C /* RoundedCorner.swift in Sources */,
 				53FEFF152879FCB70016B21C /* Storable.swift in Sources */,
 				53FEFF78287D51F30016B21C /* FeedView.swift in Sources */,
@@ -678,10 +700,12 @@
 				53FEFEFE2879E7C20016B21C /* Resolver+Extension.swift in Sources */,
 				53FEFEE42879DA430016B21C /* AddPostView.swift in Sources */,
 				53FEFF4E287A1CC40016B21C /* PostRealmProvider.swift in Sources */,
+				530B32BE287DA2DC00B78309 /* Alertable.swift in Sources */,
 				53FEFEDF2879D82F0016B21C /* ViewModifier.swift in Sources */,
 				53FEFEEB2879DD300016B21C /* TextArea.swift in Sources */,
 				53FEFF2F287A06BB0016B21C /* CustomLogger.swift in Sources */,
 				53FEFF66287B662F0016B21C /* ProfileInfoModel.swift in Sources */,
+				530B32BC287DA23700B78309 /* NotificationDataModel.swift in Sources */,
 				53FEFF4C287A1CAA0016B21C /* PostProvider.swift in Sources */,
 				53FEFEE62879DAF90016B21C /* AddPostViewModel.swift in Sources */,
 				53FEFECE2879D1200016B21C /* TabBarItems.swift in Sources */,
