@@ -46,12 +46,8 @@ struct ProfileView: View {
                 ProfileIdentification(username: data.currentUser.username)
                 Text("Joined \(data.joinerDate)")
                 countPosts.padding(.vertical)
-                ScrollView {
-                    ForEach(data.posts, id: \.uuid) { post in
-                        PostView(post: post, isFromCurrentUser: true) {
-                            viewModel.repost(post)
-                        }
-                    }
+                FeedView(posts: data.posts) { post in
+                    viewModel.repost(post)
                 }.padding(.vertical)
                 Spacer()
             }

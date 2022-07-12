@@ -72,6 +72,8 @@
 		53FEFF6B287C3C270016B21C /* DebugViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF6A287C3C260016B21C /* DebugViewModel.swift */; };
 		53FEFF72287C533E0016B21C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF71287C533E0016B21C /* String.swift */; };
 		53FEFF74287C67EF0016B21C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF73287C67EF0016B21C /* Color.swift */; };
+		53FEFF76287D4FB20016B21C /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF75287D4FB20016B21C /* EmptyStateView.swift */; };
+		53FEFF78287D51F30016B21C /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFF77287D51F30016B21C /* FeedView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,6 +150,8 @@
 		53FEFF6A287C3C260016B21C /* DebugViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewModel.swift; sourceTree = "<group>"; };
 		53FEFF71287C533E0016B21C /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		53FEFF73287C67EF0016B21C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		53FEFF75287D4FB20016B21C /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		53FEFF77287D51F30016B21C /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -476,6 +480,7 @@
 				53FEFEC62879C8D70016B21C /* ProfilePicture.swift */,
 				53FEFEC82879C94A0016B21C /* ProfileIdentification.swift */,
 				53FEFEEA2879DD300016B21C /* TextArea.swift */,
+				53FEFF75287D4FB20016B21C /* EmptyStateView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -483,6 +488,7 @@
 		53FEFF56287A347A0016B21C /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				53FEFF77287D51F30016B21C /* FeedView.swift */,
 				53FEFEC12879C30C0016B21C /* PostView.swift */,
 			);
 			path = Feed;
@@ -656,6 +662,7 @@
 				53FEFEFB2879E7840016B21C /* Container+Extension.swift in Sources */,
 				53FEFED32879D24D0016B21C /* RoundedCorner.swift in Sources */,
 				53FEFF152879FCB70016B21C /* Storable.swift in Sources */,
+				53FEFF78287D51F30016B21C /* FeedView.swift in Sources */,
 				53FEFEF32879E6E50016B21C /* PosterrAssembler.swift in Sources */,
 				53FEFF39287A0E410016B21C /* UserRepository.swift in Sources */,
 				53FEFF4A287A19C30016B21C /* PostRepository.swift in Sources */,
@@ -663,6 +670,7 @@
 				53FEFF6B287C3C270016B21C /* DebugViewModel.swift in Sources */,
 				53FEFF2A287A065E0016B21C /* UserRealmProvider.swift in Sources */,
 				53FEFF52287A1FF50016B21C /* DefaultPostRepository.swift in Sources */,
+				53FEFF76287D4FB20016B21C /* EmptyStateView.swift in Sources */,
 				53FEFEFE2879E7C20016B21C /* Resolver+Extension.swift in Sources */,
 				53FEFEE42879DA430016B21C /* AddPostView.swift in Sources */,
 				53FEFF4E287A1CC40016B21C /* PostRealmProvider.swift in Sources */,

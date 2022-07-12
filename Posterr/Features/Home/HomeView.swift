@@ -17,13 +17,10 @@ struct HomeView: View {
             .onAppear(perform: viewModel.onAppear)
     }
     
+    @ViewBuilder
     private var content: some View {
-        ScrollView {
-            ForEach(viewModel.posts, id: \.uuid) { post in
-                PostView(post: post, isFromCurrentUser: post.user == viewModel.currentUser) {
-                    viewModel.repost(post)
-                }
-            }
+        FeedView(posts: viewModel.posts) { post in
+            viewModel.repost(post)
         }
     }
     

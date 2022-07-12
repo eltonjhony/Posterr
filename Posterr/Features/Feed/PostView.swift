@@ -10,11 +10,10 @@ import SwiftUI
 struct PostView: View {
     let post: PostModel
     
-    var isFromCurrentUser: Bool = false
     var isFromFeed: Bool = true
     
     var onRepost: ActionCompletion? = nil
-    @State var showQuote: Bool = false
+    @State var startQuoting: Bool = false
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -26,7 +25,7 @@ struct PostView: View {
             }
             separatorLine
         }
-        .sheet(isPresented: $showQuote) {
+        .sheet(isPresented: $startQuoting) {
             AddPostView(
                 viewModel: PosterrAssembler.resolve(
                     AddPostView.ViewModel.self,
@@ -61,9 +60,8 @@ struct PostView: View {
             if let user = post.user {
                 HStack(spacing: 2) {
                     Image(systemName: "repeat")
-                    Text("Repost from \(isFromCurrentUser ? "you" : user.username)")
+                    Text("Repost from \(user.username)")
                         .fontWeight(.semibold)
-                        
                     Spacer()
                 }
                 .font(.footnote)
@@ -114,8 +112,9 @@ struct PostView: View {
                         .foregroundColor(.appAccent)
                 }
                 Image(systemName: "quote.bubble")
-                    .behaviour(.touchable({showQuote.toggle()}))
-                    .foregroundColor(.appAccent)
+                    .behaviour(.touchable() {
+                        startQuoting.toggle()
+                    }).foregroundColor(.appAccent)
                 Spacer()
             }
             .padding(.vertical, 4)
