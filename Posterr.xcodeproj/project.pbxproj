@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		530B32B7287D6E3F00B78309 /* CharacterCountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B32B6287D6E3F00B78309 /* CharacterCountdownView.swift */; };
 		53FEFE932879AFCF0016B21C /* PosterrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFE922879AFCF0016B21C /* PosterrApp.swift */; };
 		53FEFE952879AFCF0016B21C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FEFE942879AFCF0016B21C /* HomeView.swift */; };
 		53FEFE972879AFD10016B21C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53FEFE962879AFD10016B21C /* Assets.xcassets */; };
@@ -87,6 +88,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		530B32B6287D6E3F00B78309 /* CharacterCountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCountdownView.swift; sourceTree = "<group>"; };
 		53FEFE8F2879AFCF0016B21C /* Posterr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Posterr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53FEFE922879AFCF0016B21C /* PosterrApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterrApp.swift; sourceTree = "<group>"; };
 		53FEFE942879AFCF0016B21C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -481,6 +483,7 @@
 				53FEFEC82879C94A0016B21C /* ProfileIdentification.swift */,
 				53FEFEEA2879DD300016B21C /* TextArea.swift */,
 				53FEFF75287D4FB20016B21C /* EmptyStateView.swift */,
+				530B32B6287D6E3F00B78309 /* CharacterCountdownView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -629,6 +632,7 @@
 				53FEFEDA2879D4250016B21C /* ProfileView.swift in Sources */,
 				53FEFF50287A1D1F0016B21C /* PostEntity.swift in Sources */,
 				53FEFEC92879C94A0016B21C /* ProfileIdentification.swift in Sources */,
+				530B32B7287D6E3F00B78309 /* CharacterCountdownView.swift in Sources */,
 				53FEFF052879E9170016B21C /* HomeViewModel.swift in Sources */,
 				53FEFECC2879D1150016B21C /* TabBarView.swift in Sources */,
 				53FEFE932879AFCF0016B21C /* PosterrApp.swift in Sources */,

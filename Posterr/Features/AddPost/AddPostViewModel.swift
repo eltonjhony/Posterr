@@ -30,6 +30,10 @@ extension AddPostView {
             }
         }
         
+        var characterLimit: Int {
+            PostLimit.content.rawValue
+        }
+        
         var placeholderText: String {
             type == .post ? "What's happening" : "Add a comment"
         }

@@ -27,10 +27,20 @@ struct AddPostView: View {
                 }
                 
                 HStack(alignment: .top) {
-                    if let profilePicture = viewModel.currentUser?.profilePicture {
-                        ProfilePicture(picture: profilePicture)
+                    VStack {
+                        if let profilePicture = viewModel.currentUser?.profilePicture {
+                            ProfilePicture(picture: profilePicture)
+                        }
+                        CharacterCountdownView(
+                            value: Double(viewModel.content.count),
+                            maxCharacteres: Double(viewModel.characterLimit)
+                        )
                     }
-                    TextArea(placeholder: viewModel.placeholderText, text: $viewModel.content)
+                    TextArea(
+                        characterLimit: viewModel.characterLimit,
+                        placeholder: viewModel.placeholderText,
+                        text: $viewModel.content
+                    )
                 }
                 
             }

@@ -8,8 +8,19 @@
 import Foundation
 import Combine
 
+public enum PostableError: Error {
+    case dailyLimitExceeded
+    case contentExceeded
+}
+
+public enum PostLimit: Int {
+    case content = 777
+    case dailyPosts = 5
+}
+
 public protocol PostUpdatable {
     var didUpdate: PassthroughSubject<Void, Never> { get }
+    var didError: PassthroughSubject<Error, Never> { get }
     
     func post(with content: String)
     func repost(post: PostModel)
@@ -21,6 +32,7 @@ final class PostUpdatableUseCase: PostUpdatable, Loggable {
     // MARK: - Private(set) members
     
     private(set) var didUpdate: PassthroughSubject<Void, Never> = .init()
+    private(set) var didError: PassthroughSubject<Error, Never> = .init()
     
     // MARK: - Private members
 
@@ -39,60 +51,45 @@ final class PostUpdatableUseCase: PostUpdatable, Loggable {
     // MARK: - Action Methods
     
     func post(with content: String) {
-        userRepository.getCurrentUser()
-            .flatMap {
-                self.submitPost(for: $0, with: .init(content: content))
-            }
-            .sink {
-                if case let .failure(error) = $0 {
-                    //TODO: Handle error
-                    debugPrint(error)
-                }
-            } receiveValue: { [weak self] model in
-                self?.didUpdate.send()
-            }.store(in: &cancellables)
+        submitPost(with: .init(content: content))
     }
     
     func repost(post: PostModel) {
-        userRepository.getCurrentUser()
-            .flatMap {
-                self.submitPost(for: $0, with: .init(content: post.content, source: .repost, originalPost: post))
-            }
-            .sink {
-                if case let .failure(error) = $0 {
-                    //TODO: Handle error
-                    debugPrint(error)
-                }
-            } receiveValue: { [weak self] model in
-                self?.didUpdate.send()
-            }.store(in: &cancellables)
+        submitPost(with: .init(content: post.content, source: .repost, originalPost: post))
     }
     
     func quote(of post: PostModel, with content: String) {
-        userRepository.getCurrentUser()
-            .flatMap {
-                self.submitPost(for: $0, with: .init(content: content, source: .quote, originalPost: post))
-            }
-            .sink {
-                if case let .failure(error) = $0 {
-                    //TODO: Handle error
-                    debugPrint(error)
-                }
-            } receiveValue: { [weak self] model in
-                self?.didUpdate.send()
-            }.store(in: &cancellables)
+        submitPost(with: .init(content: content, source: .quote, originalPost: post))
     }
     
-    private func submitPost(for user: UserModel, with request: SubmitRequest) -> AnyPublisher<PostModel, Error> {
-        let post = PostModel(
-            uuid: UUID().uuidString,
-            content: request.content,
-            createdAt: Date(),
-            user: user,
-            source: request.source,
-            originalPosts: request.originalPost != nil ? [request.originalPost!] : []
-        )
-        return postRepository.addPost(post)
+    private func submitPost(with request: SubmitRequest) {
+        userRepository.getCurrentUser()
+            .flatMap { user in
+                self.validateSubmission(with: user, and: request.content)
+                    .flatMap { response -> AnyPublisher<PostModel, Error> in
+                        let post = PostModel(
+                            uuid: UUID().uuidString,
+                            content: request.content,
+                            createdAt: Date(),
+                            user: user,
+                            source: request.source,
+                            originalPosts: request.originalPost != nil ? [request.originalPost!] : []
+                        )
+                        return self.postRepository.addPost(post).eraseToAnyPublisher()
+                    }.eraseToAnyPublisher()
+            }
+            .sink(didUpdate, didError)
+            .store(in: &cancellables)
+    }
+    
+    private func validateSubmission(with user: UserModel, and content: String) -> AnyPublisher<Void, Error> {
+        guard content.count < PostLimit.content.rawValue else {
+            return Fail(error: PostableError.contentExceeded).eraseToAnyPublisher()
+        }
+        return postRepository.getMyPosts(between: Date().startOfDay, and: Date().endOfDay, with: user.uuid)
+            .tryMap { myDailyPosts in
+                guard myDailyPosts.count < PostLimit.dailyPosts.rawValue else { throw PostableError.dailyLimitExceeded }
+            }.eraseToAnyPublisher()
     }
     
     private struct SubmitRequest {
@@ -107,4 +104,17 @@ final class PostUpdatableUseCase: PostUpdatable, Loggable {
         }
     }
 
+}
+
+private extension Publisher where Output == PostModel {
+    func sink(_ didUpdate: PassthroughSubject<Void, Never>, _ didError: PassthroughSubject<Error, Never>) -> AnyCancellable {
+        return self
+            .sink {
+                if case let .failure(error) = $0 {
+                    didError.send(error)
+                }
+            } receiveValue: { _ in
+                didUpdate.send()
+            }
+    }
 }

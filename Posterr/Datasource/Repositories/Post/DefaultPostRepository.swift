@@ -32,4 +32,8 @@ final class DefaultPostRepository: PostRepository {
         provider.getPosts(by: userId)
     }
     
+    func getMyPosts(between startDate: Date, and endDate: Date, with userId: String) -> AnyPublisher<[PostModel], Error> {
+        provider.getMyPosts(between: startDate, and: endDate, with: userId)
+    }
+    
 }

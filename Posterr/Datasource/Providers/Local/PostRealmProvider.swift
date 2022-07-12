@@ -50,4 +50,20 @@ final class PostRealmProvider: PostProvider, Loggable {
             .eraseToAnyPublisher()
     }
     
+    func getMyPosts(between startDate: Date, and endDate: Date, with userId: String) -> AnyPublisher<[PostModel], Error> {
+        let predicate = NSPredicate(
+            format: "user.uuid == %@ AND createdAt >= %@ AND createdAt <= %@",
+            userId,
+            startDate as CVarArg,
+            endDate as CVarArg)
+        return dbManager.fetch(
+            PostEntity.self,
+            predicate: predicate,
+            sorted: sortingByCreatedDate)
+            .tryMap { entities in
+                entities.map { PostModel.mapFromPersistenceObject($0) }
+            }
+            .eraseToAnyPublisher()
+    }
+    
 }

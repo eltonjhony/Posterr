@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AudioToolbox
 import SwiftUI
 
 struct TextArea: View {
@@ -15,10 +16,10 @@ struct TextArea: View {
     
     @FocusState var focusedField: FocusField?
     
+    let characterLimit: Int
     let placeholder: String
     @Binding var text: String
     
-    @ViewBuilder
     var body: some View {
         ZStack(alignment: .top) {
             TextEditor(text: $text)
@@ -35,6 +36,14 @@ struct TextArea: View {
                 Spacer()
             }
             .padding(.top, 4)
+        }
+        .onChange(of: text, perform: applyCharacterLimitValidation(_:))
+    }
+    
+    private func applyCharacterLimitValidation(_ newValue: String) {
+        if newValue.count > characterLimit {
+            text = String(newValue.prefix(characterLimit))
+            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         }
     }
 }
