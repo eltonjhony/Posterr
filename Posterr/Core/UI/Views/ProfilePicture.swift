@@ -9,12 +9,12 @@ import Foundation
 import SwiftUI
 
 struct ProfilePicture: View {
-    let picture: String
+    let picture: String?
     var size: CGFloat = 60
     
     var body: some View {
         VStack {
-            Image(picture)
+            Image(picture ?? "")
                 .resizable()
                 .scaledToFill()
                 .clipped()

@@ -11,6 +11,8 @@ import SwiftUI
 struct FeedView: View {
     let posts: [PostModel]
     let currentUser: UserModel?
+    
+    var isMyFeed: Bool = false
 
     @ViewBuilder
     var body: some View {
@@ -24,7 +26,11 @@ struct FeedView: View {
     private var timeline: some View {
         ScrollView {
             ForEach(posts, id: \.uuid) { post in
-                PostView(item: .init(post: post, currentUser: currentUser))
+                PostRowView(item: .init(
+                    post: post,
+                    currentUser: currentUser,
+                    isMyFeed: isMyFeed)
+                )
             }
         }
     }

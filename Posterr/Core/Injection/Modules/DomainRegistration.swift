@@ -13,5 +13,6 @@ final class DomainRegistration: PosterrAssembly {
         container.autoregister(UserRegistrable.self, initializer: UserRegistrableUseCase.init).inObjectScope(.container)
         container.autoregister(PostUpdatable.self, initializer: PostUpdatableUseCase.init).inObjectScope(.container)
         container.autoregister(ProfileInfoFetchable.self, initializer: ProfileInfoFetchableUseCase.init).inObjectScope(.container)
+        container.autoregister(FeedFetchable.self, initializer: FeedFetchableUseCase.init).inObjectScope(.container)
     }
 }

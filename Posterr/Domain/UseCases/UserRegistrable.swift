@@ -8,6 +8,10 @@
 import Foundation
 import Combine
 
+public enum UserLimit: Int {
+    case maxCharacteres = 14
+}
+
 public protocol UserRegistrable {
     var didChangeUser: CurrentValueSubject<UserModel?, Never> { get }
     
@@ -42,6 +46,8 @@ final class UserRegistrableUseCase: UserRegistrable, Loggable {
             .sink { _ in } receiveValue: { [weak self] users in
                 if users.isEmpty {
                     self?.createFakeUsers()
+                } else {
+                    self?.didChangeUser.send(users.first { $0.isCurrent == true })
                 }
             }.store(in: &cancellables)
     }
@@ -70,7 +76,7 @@ final class UserRegistrableUseCase: UserRegistrable, Loggable {
             UserModel(uuid: UUID().uuidString, username: "kbob675", profilePicture: "user5", createdAt: Date(), isCurrent: false)
         ]
         fakeUsers.forEach { user in
-            guard user.username.isAlphanumeric, user.username.count <= 14 else {
+            guard user.username.isAlphanumeric, user.username.count <= UserLimit.maxCharacteres.rawValue else {
                 preconditionFailure("username must have maximum of 14 alphanumeric characters")
             }
             _ = userRepository.putUser(user)
@@ -78,12 +84,4 @@ final class UserRegistrableUseCase: UserRegistrable, Loggable {
         didChangeUser.send(currentUser)
     }
 
-}
-
-private extension UserModel {
-    func changing(change: (inout UserModel) -> Void) -> UserModel {
-        var user = self
-        change(&user)
-        return user
-    }
 }

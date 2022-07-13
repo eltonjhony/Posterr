@@ -51,32 +51,36 @@ final class PostUpdatableUseCase: PostUpdatable, Loggable {
     // MARK: - Action Methods
     
     func post(with content: String) {
-        submitPost(with: .init(content: content))
-    }
-    
-    func repost(post: PostModel) {
-        submitPost(with: .init(content: post.content, source: .repost, originalPost: post))
-    }
-    
-    func quote(of post: PostModel, with content: String) {
-        submitPost(with: .init(content: content, source: .quote, originalPost: post))
-    }
-    
-    private func submitPost(with request: SubmitRequest) {
+        let request: SubmitRequest = .init(content: content)
         userRepository.getCurrentUser()
             .flatMap { user in
                 self.validateSubmission(with: user, and: request.content)
-                    .flatMap { response -> AnyPublisher<PostModel, Error> in
-                        let post = PostModel(
-                            uuid: UUID().uuidString,
-                            content: request.content,
-                            createdAt: Date(),
-                            user: user,
-                            source: request.source,
-                            originalPosts: request.originalPost != nil ? [request.originalPost!] : []
-                        )
-                        return self.postRepository.addPost(post).eraseToAnyPublisher()
-                    }.eraseToAnyPublisher()
+                    .flatMap { self.submitPost(with: request, user).eraseToAnyPublisher() }
+                    .eraseToAnyPublisher()
+            }
+            .sink(didUpdate, didError)
+            .store(in: &cancellables)
+    }
+    
+    func repost(post: PostModel) {
+        let request: SubmitRequest = .init(content: post.content, source: .repost, originalPost: post)
+        userRepository.getCurrentUser()
+            .flatMap { user in
+                self.validateSubmission(with: user, and: request.content)
+                    .flatMap { self.submitPost(with: request, user).eraseToAnyPublisher() }
+                    .eraseToAnyPublisher()
+            }
+            .sink(didUpdate, didError)
+            .store(in: &cancellables)
+    }
+    
+    func quote(of post: PostModel, with content: String) {
+        let request: SubmitRequest = .init(content: content, source: .quote, originalPost: post)
+        userRepository.getCurrentUser()
+            .flatMap { user in
+                self.validateSubmission(with: user, and: request.content)
+                    .flatMap { self.submitPost(with: request, user).eraseToAnyPublisher() }
+                    .eraseToAnyPublisher()
             }
             .sink(didUpdate, didError)
             .store(in: &cancellables)
@@ -92,6 +96,33 @@ final class PostUpdatableUseCase: PostUpdatable, Loggable {
             }.eraseToAnyPublisher()
     }
     
+    private func submitPost(with request: SubmitRequest, _ user: UserModel) -> AnyPublisher<PostModel, Error> {
+        postRepository.addPost(request.makePost(with: user))
+            .flatMap { post in
+                self.updateReferences(to: user, with: post)
+                    .map { _ in post }
+                    .eraseToAnyPublisher()
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    private func updateReferences(to user: UserModel, with post: PostModel) -> AnyPublisher<UserModel, Error> {
+        guard let postId = post.originalPosts.first?.uuid else {
+            return userRepository.putUser(user.changing {
+                $0.postsCount += 1
+            })
+        }
+        guard post.source == .repost else {
+            return userRepository.putUser(user.changing {
+                $0.quotePostingCount += 1
+            })
+        }
+        return userRepository.putUser(user.changing {
+            $0.repostsId.append(postId)
+            $0.repostsCount += 1
+        })
+    }
+    
     private struct SubmitRequest {
         let content: String
         let source: SourceType
@@ -102,19 +133,29 @@ final class PostUpdatableUseCase: PostUpdatable, Loggable {
             self.source = source
             self.originalPost = originalPost
         }
+        
+        func makePost(with user: UserModel) -> PostModel {
+            PostModel(
+                uuid: UUID().uuidString,
+                content: content,
+                createdAt: Date(),
+                user: user,
+                source: source,
+                originalPosts: originalPost != nil ? [originalPost!] : []
+            )
+        }
     }
 
 }
 
 private extension Publisher where Output == PostModel {
     func sink(_ didUpdate: PassthroughSubject<Void, Never>, _ didError: PassthroughSubject<Error, Never>) -> AnyCancellable {
-        return self
-            .sink {
-                if case let .failure(error) = $0 {
-                    didError.send(error)
-                }
-            } receiveValue: { _ in
-                didUpdate.send()
+        sink {
+            if case let .failure(error) = $0 {
+                didError.send(error)
             }
+        } receiveValue: { _ in
+            didUpdate.send()
+        }
     }
 }

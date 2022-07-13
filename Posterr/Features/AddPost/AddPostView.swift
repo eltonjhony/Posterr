@@ -12,6 +12,13 @@ struct AddPostView: View {
     @ObservedObject var viewModel: ViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    init(type: SubmissionType) {
+        viewModel = PosterrAssembler.resolve(
+            AddPostView.ViewModel.self,
+            argument: type
+        )
+    }
+    
     var body: some View {
         NotificationView(data: viewModel.alert, isShown: $viewModel.isAlertShown) {
             content
@@ -60,7 +67,7 @@ struct AddPostView: View {
             if let originalPost = viewModel.originalPost {
                 HStack {
                     Spacer()
-                    PostView(item: .init(post: originalPost, isFromFeed: false))
+                    PostContentView(post: originalPost, canRepost: false)
                 }
             }
             
@@ -68,4 +75,8 @@ struct AddPostView: View {
         }
     }
     
+}
+
+public enum SubmissionType {
+    case post, quote(PostModel)
 }

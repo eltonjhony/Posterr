@@ -48,7 +48,7 @@ struct ProfileView: View {
                 ProfileIdentification(username: data.currentUser.username)
                 Text("Joined \(data.joinerDate)")
                 countPosts.padding(.vertical)
-                FeedView(posts: data.posts, currentUser: data.currentUser)
+                FeedView(posts: data.posts, currentUser: data.currentUser, isMyFeed: true)
                     .padding(.vertical)
                 Spacer()
             }
@@ -60,19 +60,19 @@ struct ProfileView: View {
             if let data = viewModel.data {
                 HStack(spacing: 2) {
                     Text("posts:")
-                    Text("\(data.postsCount)")
+                    Text("\(data.currentUser.postsCount)")
                         .fontWeight(.semibold)
                 }
                 
                 HStack(spacing: 2) {
                     Text("reposts:")
-                    Text("\(data.repostCount)")
+                    Text("\(data.currentUser.repostsCount)")
                         .fontWeight(.semibold)
                 }
                 
                 HStack(spacing: 2) {
                     Text("quote-posts:")
-                    Text("\(data.quoteCount)")
+                    Text("\(data.currentUser.quotePostingCount)")
                         .fontWeight(.semibold)
                 }
             }

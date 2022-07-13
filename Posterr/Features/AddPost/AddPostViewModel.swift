@@ -19,11 +19,18 @@ extension AddPostView {
         @Published var content: String = ""
         @Published var dismiss: Bool = false
         
-        let originalPost: PostModel?
+        private let type: SubmissionType
         private let userRepository: UserRepository
         private let usecase: PostUpdatable
         
         private var cancellables = [AnyCancellable]()
+        
+        var originalPost: PostModel? {
+            guard case let .quote(post) = type else {
+                return nil
+            }
+            return post
+        }
         
         var characterLimit: Int {
             PostLimit.content.rawValue
@@ -33,8 +40,8 @@ extension AddPostView {
             originalPost == nil ? "What's happening" : "Add a comment"
         }
         
-        init(originalPost: PostModel?, userRepository: UserRepository, usecase: PostUpdatable) {
-            self.originalPost = originalPost
+        init(type: SubmissionType, userRepository: UserRepository, usecase: PostUpdatable) {
+            self.type = type
             self.userRepository = userRepository
             self.usecase = usecase
             

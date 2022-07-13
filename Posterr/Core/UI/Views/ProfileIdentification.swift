@@ -9,10 +9,10 @@ import Foundation
 import SwiftUI
 
 struct ProfileIdentification: View {
-    let username: String
+    let username: String?
     
     var body: some View {
-        Text(username)
+        Text(username ?? "")
             .fontWeight(.semibold)
             .foregroundColor(.contentInverted)
     }

@@ -18,7 +18,7 @@ final class DefaultPostRepository: PostRepository {
         self.provider = provider
     }
     
-    // MARK: - User methods
+    // MARK: - Post methods
     
     func addPost(_ post: PostModel) -> AnyPublisher<PostModel, Error> {
         provider.addPost(post)

@@ -14,4 +14,10 @@ public final class UserEntity: Object {
     @Persisted var profilePicture: String
     @Persisted var createdAt: Date
     @Persisted var isCurrent: Bool
+    
+    @Persisted var repostsId: List<String>
+    
+    @Persisted var postsCount: Int
+    @Persisted var repostsCount: Int
+    @Persisted var quotePostingCount: Int
 }

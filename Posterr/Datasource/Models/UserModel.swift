@@ -13,6 +13,12 @@ public struct UserModel: ModelProtocol {
     let profilePicture: String
     let createdAt: Date
     var isCurrent: Bool
+    
+    var repostsId: [String] = []
+    
+    var postsCount: Int = 0
+    var repostsCount: Int = 0
+    var quotePostingCount: Int = 0
 }
 
 extension UserModel: MappableProtocol {
@@ -23,6 +29,10 @@ extension UserModel: MappableProtocol {
         entity.profilePicture = profilePicture
         entity.createdAt = createdAt
         entity.isCurrent = isCurrent
+        entity.repostsId.append(objectsIn: repostsId)
+        entity.postsCount = postsCount
+        entity.repostsCount = repostsCount
+        entity.quotePostingCount = quotePostingCount
         return entity
     }
 
@@ -32,7 +42,19 @@ extension UserModel: MappableProtocol {
             username: object.username,
             profilePicture: object.profilePicture,
             createdAt: object.createdAt,
-            isCurrent: object.isCurrent
+            isCurrent: object.isCurrent,
+            repostsId: Array(object.repostsId),
+            postsCount: object.postsCount,
+            repostsCount: object.repostsCount,
+            quotePostingCount: object.quotePostingCount
         )
+    }
+}
+
+extension UserModel {
+    func changing(change: (inout UserModel) -> Void) -> UserModel {
+        var user = self
+        change(&user)
+        return user
     }
 }
