@@ -15,10 +15,13 @@ final class UserRepositoryMock: UserRepository {
     var model: UserModel?
     var models: [UserModel] = []
     
+    var puttedUser: UserModel?
+    
     var error: Error?
     
     func putUser(_ user: UserModel) -> AnyPublisher<UserModel, Error> {
-        Future<UserModel, Error> { promisse in
+        puttedUser = user
+        return Future<UserModel, Error> { promisse in
             if let error = self.error {
                 promisse(.failure(error))
             } else if let model = self.model {

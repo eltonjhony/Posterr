@@ -78,6 +78,44 @@ class PostUpdatableTests: XCTestCase {
         
         // Assert
         expect(self.expectedSuccess).toEventually(beTrue(), timeout: .seconds(3))
+        expect(self.userRepoMock.puttedUser?.postsCount).toEventually(equal(1), timeout: .seconds(3))
+    }
+    
+    func test_submitPost_whenThereIsNoValidationError_shouldUpdateRepostReferences() {
+        // Arrange
+        let user: UserModel = makeUser()
+        let originalPost = makePost(user)
+        let post = makePost(user, source: .repost, originalPosts: [originalPost])
+        
+        userRepoMock.model = user
+        postRepoMock.model = post
+        postRepoMock.models = [post]
+        
+        // Act
+        self.usecase.post(with: shortContent)
+        
+        // Assert
+        expect(self.expectedSuccess).toEventually(beTrue(), timeout: .seconds(3))
+        expect(self.userRepoMock.puttedUser?.repostsCount).toEventually(equal(1), timeout: .seconds(3))
+        expect(self.userRepoMock.puttedUser?.repostsId.first).toEventually(equal(originalPost.uuid), timeout: .seconds(3))
+    }
+    
+    func test_submitPost_whenThereIsNoValidationError_shouldUpdateQuotePostingReferences() {
+        // Arrange
+        let user: UserModel = makeUser()
+        let originalPost = makePost(user)
+        let post = makePost(user, source: .quote, originalPosts: [originalPost])
+        
+        userRepoMock.model = user
+        postRepoMock.model = post
+        postRepoMock.models = [post]
+        
+        // Act
+        self.usecase.post(with: shortContent)
+        
+        // Assert
+        expect(self.expectedSuccess).toEventually(beTrue(), timeout: .seconds(3))
+        expect(self.userRepoMock.puttedUser?.quotePostingCount).toEventually(equal(1), timeout: .seconds(3))
     }
 
 }
@@ -100,7 +138,7 @@ private extension PostUpdatableTests {
         .init(uuid: UUID().uuidString, username: "eljholiveira", profilePicture: "", createdAt: Date(), isCurrent: isCurrent)
     }
     
-    private func makePost(_ user: UserModel, and content: String = "test content") -> PostModel {
-        .init(uuid: UUID().uuidString, content: content, createdAt: Date(), user: user, source: .post, originalPosts: [])
+    private func makePost(_ user: UserModel, and content: String = "test content", source: SourceType = .post, originalPosts: [PostModel] = []) -> PostModel {
+        .init(uuid: UUID().uuidString, content: content, createdAt: Date(), user: user, source: source, originalPosts: originalPosts)
     }
 }
