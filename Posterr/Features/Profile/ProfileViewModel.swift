@@ -40,7 +40,7 @@ extension ProfileView {
             }.store(in: &cancellables)
             
             fetchable.didError.sink { [weak self] error in
-                self?.toastError(error)
+                self?.toast(with: error)
             }.store(in: &cancellables)
             
             fetchable.data

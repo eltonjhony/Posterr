@@ -64,7 +64,7 @@ extension AddPostView {
             userRepository.getCurrentUser()
                 .sink { [weak self] in
                     if case let .failure(error) = $0 {
-                        self?.toastError(error)
+                        self?.toast(with: error)
                     }
                 } receiveValue: { [weak self] model in
                     self?.currentUser = model
@@ -77,7 +77,7 @@ extension AddPostView {
             }.store(in: &cancellables)
             
             usecase.didError.sink { [weak self] error in
-                self?.toastError(error)
+                self?.toast(with: error)
             }.store(in: &cancellables)
         }
         

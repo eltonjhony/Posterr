@@ -11,12 +11,12 @@ protocol Alertable: AnyObject {
     var alert: NotificationDataModel { get set }
     var isAlertShown: Bool { get set }
 
-    func toastError(_ error: Error)
+    func toast(with error: Error)
 }
 
 extension Alertable {
     
-    func toastError(_ error: Error) {
+    func toast(with error: Error) {
         guard let error = error as? PostableError else {
             alert = ToastDataModel.unknown
             isAlertShown = true
