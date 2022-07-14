@@ -9,14 +9,11 @@ import Foundation
 import SwiftUI
 
 struct FeedView: View {
-    let posts: [PostModel]
-    let currentUser: UserModel?
-    
-    var isMyFeed: Bool = false
+    let feed: FeedModel
 
     @ViewBuilder
     var body: some View {
-        if posts.isEmpty {
+        if feed.posts.isEmpty {
             EmptyStateView()
         } else {
             timeline
@@ -25,11 +22,11 @@ struct FeedView: View {
     
     private var timeline: some View {
         ScrollView {
-            ForEach(posts, id: \.uuid) { post in
+            ForEach(feed.posts, id: \.uuid) { post in
                 PostRowView(item: .init(
                     post: post,
-                    currentUser: currentUser,
-                    isMyFeed: isMyFeed)
+                    currentUser: feed.currentUser,
+                    isMyFeed: feed.isMyFeed)
                 )
             }
         }

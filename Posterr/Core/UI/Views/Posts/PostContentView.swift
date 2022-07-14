@@ -15,9 +15,9 @@ struct PostContentView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .top) {
-                ProfilePicture(picture: post.user?.profilePicture)
+                ProfilePictureView(picture: post.user?.profilePicture)
                 VStack(alignment: .leading) {
-                    ProfileIdentification(username: post.user?.username)
+                    ProfileIdentificationView(username: post.user?.username)
                     if [.post, .repost].contains(post.source) {
                         Text(post.content)
                     } else if case .quote = post.source {

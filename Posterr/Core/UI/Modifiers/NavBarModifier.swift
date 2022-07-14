@@ -13,10 +13,12 @@ struct NavBarModifier: ViewModifier {
     
     @State var showAddPost: Bool = false
     
+    @EnvironmentObject var sceneDelegate: SceneDelegate
+    
     func body(content: Content) -> some View {
         VStack(spacing: .zero) {
             header
-                .padding(.top, .statusBarHeight)
+                .padding(.top, sceneDelegate.window?.statusBarHeight ?? 0)
             content
                 .sheet(isPresented: $showAddPost) {
                     AddPostView(type: .post)
@@ -58,5 +60,4 @@ struct NavBarModifier: ViewModifier {
 
 extension CGFloat {
     static let headerHeight: CGFloat = 84
-    static var statusBarHeight = CGFloat(UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0)
 }

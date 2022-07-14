@@ -1,5 +1,5 @@
 //
-//  ProfilePicture.swift
+//  ProfilePictureView.swift
 //  Posterr
 //
 //  Created by Elton Jhony on 09.07.22.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct ProfilePicture: View {
+struct ProfilePictureView: View {
     let picture: String?
     var size: CGFloat = 60
     

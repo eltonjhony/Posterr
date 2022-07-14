@@ -22,7 +22,7 @@ struct HomeView: View {
     @ViewBuilder
     private var content: some View {
         if let feed = viewModel.feed {
-            FeedView(posts: feed.posts, currentUser: feed.currentUser)
+            FeedView(feed: feed)
         }
     }
     

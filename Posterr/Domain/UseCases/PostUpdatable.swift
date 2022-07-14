@@ -87,7 +87,7 @@ final class PostUpdatableUseCase: PostUpdatable, Loggable {
     }
     
     private func validateSubmission(with user: UserModel, and content: String) -> AnyPublisher<Void, Error> {
-        guard content.count < PostLimit.content.rawValue else {
+        guard content.count <= PostLimit.content.rawValue else {
             return Fail(error: PostableError.contentExceeded).eraseToAnyPublisher()
         }
         return postRepository.getMyPosts(between: Date().startOfDay, and: Date().endOfDay, with: user.uuid)

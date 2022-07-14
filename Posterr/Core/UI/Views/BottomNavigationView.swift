@@ -16,6 +16,8 @@ protocol NavTab {
 struct BottomNavigationView: View {
     let tabs: [NavTab]
     @Binding var selectedTab: Int
+    
+    @EnvironmentObject var sceneDelegate: SceneDelegate
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -51,7 +53,7 @@ struct BottomNavigationView: View {
             }
         }
         .frame(height: .tabBarHeight)
-        .padding(.bottom, max(UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0, 8))
+        .padding(.bottom, max(sceneDelegate.window?.safeAreaInsets.bottom ?? 0, 8))
         .background(Color.white)
         .cornerRadius(32, corners: [.topLeft, .topRight])
     }

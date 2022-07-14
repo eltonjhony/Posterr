@@ -10,4 +10,5 @@ import Foundation
 public struct FeedModel {
     let currentUser: UserModel
     let posts: [PostModel]
+    var isMyFeed: Bool = false
 }

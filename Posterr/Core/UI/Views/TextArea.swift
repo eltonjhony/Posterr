@@ -32,6 +32,8 @@ struct TextArea: View {
             HStack {
                 if text.isBlank {
                     Text(placeholder)
+                        .fontWeight(.light)
+                        .foregroundColor(.contentInverted)
                 }
                 Spacer()
             }

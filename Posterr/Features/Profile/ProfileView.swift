@@ -37,7 +37,7 @@ struct ProfileView: View {
     @ViewBuilder
     private var profilePicture: some View {
         if let user = viewModel.data?.currentUser {
-            ProfilePicture(picture: user.profilePicture, size: 90)
+            ProfilePictureView(picture: user.profilePicture, size: 90)
         }
     }
     
@@ -45,11 +45,14 @@ struct ProfileView: View {
     private var content: some View {
         if let data = viewModel.data {
             VStack {
-                ProfileIdentification(username: data.currentUser.username)
+                ProfileIdentificationView(username: data.currentUser.username)
                 Text("Joined \(data.joinerDate)")
                 countPosts.padding(.vertical)
-                FeedView(posts: data.posts, currentUser: data.currentUser, isMyFeed: true)
-                    .padding(.vertical)
+                FeedView(feed: .init(
+                    currentUser: data.currentUser,
+                    posts: data.posts,
+                    isMyFeed: true)
+                ).padding(.top)
                 Spacer()
             }
         }

@@ -18,8 +18,8 @@ struct QuoteContentView: View {
             VStack(alignment: .leading, spacing: 4) {
                 if let parentPost = originalPost {
                     HStack(alignment: .top, spacing: 2) {
-                        ProfilePicture(picture: post.quotingUser?.profilePicture ?? "", size: 20)
-                        ProfileIdentification(username: post.quotingUser?.username ?? "")
+                        ProfilePictureView(picture: post.quotingUser?.profilePicture ?? "", size: 20)
+                        ProfileIdentificationView(username: post.quotingUser?.username ?? "")
                         Spacer()
                     }
                     Text(parentPost.content)

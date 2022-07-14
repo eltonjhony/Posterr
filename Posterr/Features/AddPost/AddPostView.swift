@@ -42,13 +42,13 @@ struct AddPostView: View {
                             .foregroundColor(.appPrimary)
                             .fontWeight(.semibold)
                     }
-                    .disabled(viewModel.content.isEmpty)
+                    .disabled(viewModel.content.isBlank)
                 }
                 
                 HStack(alignment: .top) {
                     VStack {
                         if let profilePicture = viewModel.currentUser?.profilePicture {
-                            ProfilePicture(picture: profilePicture)
+                            ProfilePictureView(picture: profilePicture)
                         }
                         CharacterCountdownView(
                             value: Double(viewModel.content.count),
