@@ -7,7 +7,6 @@
 
 import Foundation
 import XCTest
-import Nimble
 import Combine
 
 @testable import Posterr
@@ -21,7 +20,8 @@ class PostUpdatableTests: XCTestCase {
     
     private var cancellables = [AnyCancellable]()
     
-    private var expectedSuccess = false
+    private var successExpectation: XCTestExpectation!
+    private var errorExpectation: XCTestExpectation!
     private var expectedError: PostableError?
     
     override func setUp() {
@@ -31,10 +31,10 @@ class PostUpdatableTests: XCTestCase {
         usecase = PostUpdatableUseCase(userRepository: userRepoMock, postRepository: postRepoMock)
         usecase.didError.sink { error in
             self.expectedError = error as? PostableError
+            self.errorExpectation.fulfill()
         }.store(in: &self.cancellables)
-        expectedSuccess = false
         usecase.didUpdate.sink { _ in
-            self.expectedSuccess.toggle()
+            self.successExpectation.fulfill()
         }.store(in: &self.cancellables)
     }
     
@@ -45,12 +45,14 @@ class PostUpdatableTests: XCTestCase {
         postRepoMock.models = [
             makePost(user, and: longContent)
         ]
+        errorExpectation = makeExpec()
         
         // Act
         self.usecase.post(with: self.longContent)
+        wait(for: [errorExpectation], timeout: 3.0)
         
         // Assert
-        expect(self.expectedError == .contentExceeded).toEventually(beTrue(), timeout: .seconds(3))
+        XCTAssertTrue(expectedError == .contentExceeded)
     }
     
     func test_submitPost_whenDailyLimitExceeded_shouldReturnError() {
@@ -58,12 +60,14 @@ class PostUpdatableTests: XCTestCase {
         let user: UserModel = makeUser()
         userRepoMock.model = user
         postRepoMock.models = makePosts(of: 5)
+        errorExpectation = makeExpec()
         
         // Act
         self.usecase.post(with: shortContent)
+        wait(for: [errorExpectation], timeout: 3.0)
         
         // Assert
-        expect(self.expectedError == .dailyLimitExceeded).toEventually(beTrue(), timeout: .seconds(3))
+        XCTAssertTrue(expectedError == .dailyLimitExceeded)
     }
     
     func test_submitPost_whenThereIsNoValidationError_shouldReturnSuccess() {
@@ -72,13 +76,14 @@ class PostUpdatableTests: XCTestCase {
         userRepoMock.model = user
         postRepoMock.model = makePost(user)
         postRepoMock.models = makePosts(of: 4)
+        successExpectation = makeExpec()
         
         // Act
         self.usecase.post(with: shortContent)
+        wait(for: [successExpectation], timeout: 3.0)
         
         // Assert
-        expect(self.expectedSuccess).toEventually(beTrue(), timeout: .seconds(3))
-        expect(self.userRepoMock.puttedUser?.postsCount).toEventually(equal(1), timeout: .seconds(3))
+        XCTAssertEqual(userRepoMock.puttedUser?.postsCount, 1)
     }
     
     func test_submitPost_whenThereIsNoValidationError_shouldUpdateRepostReferences() {
@@ -86,6 +91,7 @@ class PostUpdatableTests: XCTestCase {
         let user: UserModel = makeUser()
         let originalPost = makePost(user)
         let post = makePost(user, source: .repost, originalPosts: [originalPost])
+        successExpectation = makeExpec()
         
         userRepoMock.model = user
         postRepoMock.model = post
@@ -93,11 +99,11 @@ class PostUpdatableTests: XCTestCase {
         
         // Act
         self.usecase.post(with: shortContent)
+        wait(for: [successExpectation], timeout: 3.0)
         
         // Assert
-        expect(self.expectedSuccess).toEventually(beTrue(), timeout: .seconds(3))
-        expect(self.userRepoMock.puttedUser?.repostsCount).toEventually(equal(1), timeout: .seconds(3))
-        expect(self.userRepoMock.puttedUser?.repostsId.first).toEventually(equal(originalPost.uuid), timeout: .seconds(3))
+        XCTAssertEqual(userRepoMock.puttedUser?.repostsCount, 1)
+        XCTAssertEqual(userRepoMock.puttedUser?.repostsId.first, originalPost.uuid)
     }
     
     func test_submitPost_whenThereIsNoValidationError_shouldUpdateQuotePostingReferences() {
@@ -105,6 +111,7 @@ class PostUpdatableTests: XCTestCase {
         let user: UserModel = makeUser()
         let originalPost = makePost(user)
         let post = makePost(user, source: .quote, originalPosts: [originalPost])
+        successExpectation = makeExpec()
         
         userRepoMock.model = user
         postRepoMock.model = post
@@ -112,10 +119,10 @@ class PostUpdatableTests: XCTestCase {
         
         // Act
         self.usecase.post(with: shortContent)
+        wait(for: [successExpectation], timeout: 3.0)
         
         // Assert
-        expect(self.expectedSuccess).toEventually(beTrue(), timeout: .seconds(3))
-        expect(self.userRepoMock.puttedUser?.quotePostingCount).toEventually(equal(1), timeout: .seconds(3))
+        XCTAssertEqual(userRepoMock.puttedUser?.quotePostingCount, 1)
     }
 
 }
@@ -140,5 +147,9 @@ private extension PostUpdatableTests {
     
     private func makePost(_ user: UserModel, and content: String = "test content", source: SourceType = .post, originalPosts: [PostModel] = []) -> PostModel {
         .init(uuid: UUID().uuidString, content: content, createdAt: Date(), user: user, source: source, originalPosts: originalPosts)
+    }
+    
+    private func makeExpec() -> XCTestExpectation {
+        expectation(description: "new expectation")
     }
 }

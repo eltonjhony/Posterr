@@ -15,7 +15,6 @@
 		530B32CB287DD51F00B78309 /* PostUpdatableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B32CA287DD51F00B78309 /* PostUpdatableTests.swift */; };
 		530B32CE287DD58A00B78309 /* UserRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B32CD287DD58A00B78309 /* UserRepositoryMock.swift */; };
 		530B32D0287DD59B00B78309 /* PostRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B32CF287DD59B00B78309 /* PostRepositoryMock.swift */; };
-		530B32D5287DDCBC00B78309 /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = 530B32D4287DDCBC00B78309 /* Nimble */; };
 		530B32D7287E12AF00B78309 /* PostRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B32D6287E12AF00B78309 /* PostRowViewModel.swift */; };
 		530B32D9287EDC6200B78309 /* FeedFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B32D8287EDC6200B78309 /* FeedFetchable.swift */; };
 		530B32DB287EDC7500B78309 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530B32DA287EDC7500B78309 /* FeedModel.swift */; };
@@ -184,7 +183,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				530B32D5287DDCBC00B78309 /* Nimble in Frameworks */,
 				53FEFF0E2879FC470016B21C /* RealmSwift in Frameworks */,
 				53FEFF0C2879FC470016B21C /* Realm in Frameworks */,
 				53FEFEF12879E6C60016B21C /* Swinject in Frameworks */,
@@ -602,7 +600,6 @@
 				53FEFEF52879E7250016B21C /* SwinjectAutoregistration */,
 				53FEFF0B2879FC470016B21C /* Realm */,
 				53FEFF0D2879FC470016B21C /* RealmSwift */,
-				530B32D4287DDCBC00B78309 /* Nimble */,
 			);
 			productName = Posterr;
 			productReference = 53FEFE8F2879AFCF0016B21C /* Posterr.app */;
@@ -658,7 +655,6 @@
 				53FEFEEF2879E6C60016B21C /* XCRemoteSwiftPackageReference "Swinject" */,
 				53FEFEF42879E7250016B21C /* XCRemoteSwiftPackageReference "SwinjectAutoregistration" */,
 				53FEFF0A2879FC470016B21C /* XCRemoteSwiftPackageReference "realm-swift" */,
-				530B32D3287DDCBC00B78309 /* XCRemoteSwiftPackageReference "Nimble" */,
 			);
 			productRefGroup = 53FEFE902879AFCF0016B21C /* Products */;
 			projectDirPath = "";
@@ -791,6 +787,7 @@
 		53FEFEB12879AFD10016B21C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -840,12 +837,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/Frameworks/,
-					/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/,
-					/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/,
-					/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/,
-				);
+				LD_RUNPATH_SEARCH_PATHS = "";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -858,6 +850,7 @@
 		53FEFEB22879AFD10016B21C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -901,12 +894,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/Frameworks/,
-					/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/,
-					/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/,
-					/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/,
-				);
+				LD_RUNPATH_SEARCH_PATHS = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -932,6 +920,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -961,6 +950,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1047,14 +1037,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		530B32D3287DDCBC00B78309 /* XCRemoteSwiftPackageReference "Nimble" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Quick/Nimble.git";
-			requirement = {
-				kind = exactVersion;
-				version = 9.2.1;
-			};
-		};
 		53FEFEEF2879E6C60016B21C /* XCRemoteSwiftPackageReference "Swinject" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Swinject/Swinject.git";
@@ -1082,11 +1064,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		530B32D4287DDCBC00B78309 /* Nimble */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 530B32D3287DDCBC00B78309 /* XCRemoteSwiftPackageReference "Nimble" */;
-			productName = Nimble;
-		};
 		53FEFEF02879E6C60016B21C /* Swinject */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 53FEFEEF2879E6C60016B21C /* XCRemoteSwiftPackageReference "Swinject" */;
