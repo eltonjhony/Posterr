@@ -29,7 +29,10 @@ extension AddPostView {
             guard case let .quote(post) = type else {
                 return nil
             }
-            return post
+            guard case .repost = post.source else {
+                return post
+            }
+            return post.originalPosts.first
         }
         
         var characterLimit: Int {
